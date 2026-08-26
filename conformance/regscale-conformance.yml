@@ -1,0 +1,95 @@
+generated: '2026-08-26'
+method: searched
+source: https://regscale.com/security/
+docs: https://trust.regscale.com/
+note: >-
+  RegScale's own product is compliance tooling, so its published posture is unusually
+  well documented. Certification evidence below is taken verbatim from RegScale's public
+  security page. Protocol conformance is derived from the first-party gRPC contract
+  library (rs-data 1.5.0) and from the RegScale CLI's own GraphQL and REST clients; there
+  is no publicly retrievable OpenAPI document to read securitySchemes from, so
+  OAuth2/OIDC conformance below is asserted from the SSO documentation, not from a spec.
+standards:
+- id: grpc
+  conforms: true
+  evidence: 'grpc/regscale-asset-service.proto, regscale-issue-service.proto, regscale-vuln-service.proto - 3 services, 6 RPCs'
+- id: protobuf3
+  conforms: true
+  evidence: 'every reconstructed descriptor declares syntax = "proto3"'
+- id: graphql
+  conforms: true
+  evidence: 'regscale-cli AsyncRegScaleGraphQLClient posts to <tenant>/graphql; HotChocolate items/totalCount/pageInfo connection shape'
+- id: oauth2
+  conforms: true
+  evidence: 'https://regscale.readme.io/docs/setup-single-sign-on-sso - OAuth 2.0 SSO with Azure AD and Okta'
+- id: saml2
+  conforms: true
+  evidence: 'https://regscale.readme.io/docs/setup-single-sign-on-sso - SAML SSO configuration'
+- id: jwt-bearer
+  conforms: true
+  evidence: 'all RegScale API calls carry a JWT in the Authorization header; Service Account PATs are long-lived JWTs'
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'no application/problem+json usage observed in the first-party CLI response handling'
+- id: openapi
+  conforms: false
+  evidence: 'no OpenAPI/Swagger document retrievable from regscale.com, regscale.readme.io or a tenant host'
+domain_standards:
+- id: nist-oscal
+  name: NIST OSCAL (Open Security Controls Assessment Language)
+  conforms: true
+  confidence: medium
+  evidence: >-
+    RegScale markets itself as OSCAL-native and maintains a public OSCAL viewer repository
+    (github.com/RegScale/oscal-hub). The first-party CLI ships an `oscal` command group and
+    an OSCAL-aware catalogue/profile import pipeline, and the platform Tag Manager documents
+    "OSCAL-compatible exports" (https://regscale.readme.io/docs/setup-tags).
+  caveat: >-
+    Recorded from RegScale's own tooling and docs, NOT from a machine-readable contract -
+    no OpenAPI or JSON Schema declaring an OSCAL media type or schema URI was retrievable.
+- id: fedramp
+  name: FedRAMP (Rev 4 / Rev 5 / 20x, baselines High-Moderate-Low-LI-SaaS)
+  conforms: true
+  confidence: high
+  evidence: 'https://regscale.com/security/ - FedRAMP High Authorized, June 2025, DHS agency sponsorship; FedRAMP Marketplace listing'
+- id: nist-800-53
+  name: NIST SP 800-53
+  conforms: true
+  confidence: high
+  evidence: 'https://regscale.com/security/ - TX-RAMP Level 2 attests the full NIST SP 800-53 Moderate control baseline'
+- id: cyclonedx-sbom
+  name: SBOM
+  conforms: true
+  confidence: low
+  evidence: 'https://regscale.com/security/ - SBOMs published on request for the core application and the CLI automation platform; format not stated'
+  caveat: format (CycloneDX vs SPDX) is not published; recorded as an SBOM program, not a format conformance
+certifications:
+- name: FedRAMP High
+  status: authorized
+  date: '2025-06'
+  detail: agency sponsorship from DHS; listed on the FedRAMP Marketplace
+- name: SOC 2 Type 2
+  status: achieved
+  date: '2024-01'
+  detail: report available upon request
+- name: ISO 27001:2022
+  status: certified
+  detail: 123 controls, zero nonconformities, audited by A-LIGN
+- name: TX-RAMP Level 2
+  status: certified
+  detail: highest authorization level under the Texas Risk and Authorization Management Program
+- name: CSA STAR Level 1
+  status: certified
+  date: '2024-08'
+  detail: CAIQ self-assessment against the Cloud Controls Matrix
+- name: CSA STAR Valid-AI-ted
+  status: designated
+  date: '2025-09'
+  detail: 97.7% CAIQ score
+- name: DoD IL5
+  status: in-process
+  detail: DoD Cloud Computing SRG Impact Level 5
+- name: HIPAA
+  status: supported-framework
+- name: GDPR
+  status: supported-framework

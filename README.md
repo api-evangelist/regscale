@@ -64,5 +64,20 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-RegScale is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+RegScale is a Continuous Controls Monitoring (CCM) and compliance-automation company. Its
+cloud-native, OSCAL-native GRC platform keeps organizations continuously audit-ready by turning
+compliance documentation into living, machine-readable data, and it ships as a customer-tenanted
+deployment (SaaS, hybrid or on-premises).
+
+RegScale exposes three programmable surfaces: a JWT-authenticated REST API under `/api`, a
+GraphQL endpoint at `/graphql`, and a published gRPC contract library (`rs-data`) covering asset,
+issue and vulnerability ingestion. It also publishes a first-party Python CLI/SDK
+(`regscale-cli`) that doubles as an integration framework for 70+ scanners, cloud providers and
+ITSM tools.
+
+- Website: https://regscale.com/
+- Documentation: https://regscale.readme.io/docs/overview
+- API reference: https://regscale.readme.io/reference/regscale-api-documentation
+- GitHub: https://github.com/RegScale
+- CLI / SDK: https://pypi.org/project/regscale-cli/
+- gRPC contracts: https://pypi.org/project/rs-data/

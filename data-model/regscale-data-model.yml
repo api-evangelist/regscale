@@ -1,0 +1,251 @@
+generated: '2026-08-26'
+method: derived
+source: 'grpc/regscale-asset.proto, grpc/regscale-issue.proto, grpc/regscale-vuln.proto + regscale-cli 6.42.0.0 model layer'
+note: >-
+  Derived from RegScale's own published gRPC message definitions and from the 100+ model
+  classes in the first-party regscale-cli distribution. There is no public OpenAPI, so field
+  lists are authoritative only for the three entities covered by the gRPC contracts (asset,
+  issue, vulnerability); every other entity is recorded by name and REST module slug as
+  published by the CLI, without invented fields.
+identity:
+  primary_key: integer id per module
+  natural_keys: 'batch ingestion matches on caller-supplied unique_key_fields; records also carry a uuid'
+  parent_link:
+    fields: [parentId, parentModule]
+    detail: >-
+      The universal relationship edge in RegScale. Any record can belong to a record in any
+      other module by (parentId, parentModule), which is why the REST surface exposes one
+      generic child read - /api/{module}/getAllByParent/{intParentID}/{strModule} - rather than
+      per-pair nested routes.
+core_entities:
+- name: SecurityPlan
+  module: securityplans
+  role: 'root aggregate - a System Security Plan (SSP); most compliance records hang off it'
+- name: Catalogue
+  module: catalogues
+  role: 'a digitized regulation/framework (NIST 800-53, FedRAMP, CMMC, PCI DSS, ...)'
+- name: SecurityControl
+  module: securitycontrols
+  role: a control within a catalogue
+- name: ControlImplementation
+  module: controlImplementation
+  role: how a control is implemented for a given security plan
+- name: ControlObjective
+  module: controlObjectives
+- name: ImplementationObjective
+  module: implementationObjectives
+- name: ImplementationOption
+  module: implementationoptions
+- name: ControlParameter
+  module: controlParameters
+- name: ControlTestPlan
+  module: controlTestPlans
+- name: Profile
+  module: profiles
+  role: an OSCAL-style selection of controls from catalogues
+- name: ProfileMapping
+  module: profileMapping
+- name: Assessment
+  module: assessments
+- name: Issue
+  module: issues
+  role: 'a finding / POA&M item; the target of the IssueIngestionService'
+- name: Milestone
+  module: milestones
+- name: Asset
+  module: assets
+  role: 'inventory item; the target of the AssetIngestionService'
+- name: Vulnerability
+  module: vulnerabilities
+  role: target of the VulnIngestionService
+- name: ScanHistory
+  module: scanHistory
+- name: Component
+  module: components
+- name: ComponentMapping
+  module: componentmapping
+- name: SoftwareInventory
+  module: softwareinventory
+- name: PortsProtocol
+  module: portsProtocols
+- name: SecurityChecklist
+  module: securitychecklist
+- name: SBOM
+  module: sbom
+- name: Risk
+  module: risks
+- name: Threat
+  module: threats
+- name: Incident
+  module: incidents
+- name: CausalAnalysis
+  module: causalanalysis
+- name: Policy
+  module: policies
+- name: Requirement
+  module: requirements
+- name: Questionnaire
+  module: questionnaires
+- name: Workflow
+  module: workflows
+- name: WorkflowInstance
+  module: workflows/instances
+- name: Task
+  module: tasks
+- name: Evidence
+  module: evidence
+- name: File
+  module: files
+- name: Link
+  module: links
+- name: Property
+  module: properties
+- name: Comment
+  module: comments
+- name: Reference
+  module: references
+- name: Facility
+  module: facilities
+- name: Organization
+  module: organizations
+- name: StakeHolder
+  module: stakeholders
+- name: User
+  module: users
+- name: Group
+  module: groups
+- name: SystemRole
+  module: systemRoles
+- name: LeveragedAuthorization
+  module: leveraged-authorization
+- name: Interconnection
+  module: interconnections
+- name: Inheritance
+  module: inheritance
+- name: DataCenter
+  module: datacenters
+- name: Classification
+  module: classificationTypes
+- name: CCI
+  module: cci
+- name: STIG
+  module: stigs
+- name: XccdfBenchmark
+  module: xccdf-benchmarks
+- name: CustomField
+  module: customFields
+- name: Tag
+  module: tags
+relationships:
+- from: SecurityPlan
+  to: ControlImplementation
+  type: has_many
+  via: 'parentId + parentModule=securityplans (/api/controlImplementation/getByParent/{plan_id}/securityplans)'
+- from: SecurityPlan
+  to: Issue
+  type: has_many
+  via: '/api/issues/getAllByParent/{ssp_id}/securityplans'
+- from: SecurityPlan
+  to: Component
+  type: has_many
+  via: '/api/components/getAllByParent/{ssp_id}'
+- from: SecurityPlan
+  to: SystemRole
+  type: has_many
+  via: '/api/systemRoles/getAllByParent/{ssp_id}'
+- from: Catalogue
+  to: SecurityControl
+  type: has_many
+  via: '/api/SecurityControls/getList/{catalogue_id}'
+- from: SecurityControl
+  to: ControlObjective
+  type: has_many
+  via: '/api/controlObjectives/getByControl/{control_id}'
+- from: SecurityControl
+  to: CCI
+  type: has_many
+  via: '/api/cci/getByControl/{id_number}'
+- from: ControlImplementation
+  to: ImplementationObjective
+  type: has_many
+  via: '/api/implementationObjectives/getByControl/{impl_id}'
+- from: ControlImplementation
+  to: ControlParameter
+  type: has_many
+  via: '/api/parameter/implementation/{impl_id}'
+- from: ControlImplementation
+  to: SecurityControl
+  type: belongs_to
+  via: controlId
+- from: Profile
+  to: ProfileMapping
+  type: has_many
+  via: '/api/profileMapping/getByProfile/{profile_id}'
+- from: Asset
+  to: SoftwareInventory
+  type: has_many
+  via: '/api/softwareinventory/getAllByParent/{asset_id}'
+- from: Asset
+  to: SecurityChecklist
+  type: has_many
+  via: '/api/securityChecklist/getAllByParent/{asset_id}'
+- from: Asset
+  to: ScanHistory
+  type: has_many
+  via: '/api/scanhistory/getAllByParent/{asset_id}/assets'
+- from: Asset
+  to: Facility
+  type: belongs_to
+  via: facility_id
+- from: Asset
+  to: Organization
+  type: belongs_to
+  via: org_id
+- from: Asset
+  to: User
+  type: belongs_to
+  via: 'asset_owner_id, system_administrator_id'
+- from: Issue
+  to: Milestone
+  type: has_many
+  via: '/api/milestones/getAllByParent/'
+- from: Issue
+  to: Asset
+  type: has_many
+  via: IssueAssetMapping
+- from: Risk
+  to: Issue
+  type: has_many
+  via: RiskIssueMapping
+- from: Component
+  to: PortsProtocol
+  type: has_many
+  via: '/api/portsProtocols/getAllByParent/{parentId}/components'
+- from: any record
+  to: File
+  type: has_many
+  via: parentId + parentModule
+- from: any record
+  to: Link
+  type: has_many
+  via: parentId + parentModule
+- from: any record
+  to: Comment
+  type: has_many
+  via: '/api/comments/getAllByPart/{intParentID}/{strModule}/{strType}/{strPart}'
+contract_backed_entities:
+- entity: Asset
+  proto: grpc/regscale-asset.proto
+  message: AssetBase
+  field_count: 69
+  external_identifier_fields: [aws_identifier, azure_identifier, google_identifier, other_cloud_identifier, qualys_id, sicura_id, tenable_id, wiz_id, emass_id, cpe]
+  note: >-
+    The external-identifier field set is itself a finding - the asset model is designed to be
+    the join point between scanner and cloud inventories, which is what makes the ingestion
+    services the highest-volume surface.
+- entity: Issue
+  proto: grpc/regscale-issue.proto
+  message: IssueBase
+- entity: Vulnerability
+  proto: grpc/regscale-vuln.proto
+  message: VulnBase

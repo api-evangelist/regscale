@@ -1,0 +1,38 @@
+generated: '2026-08-26'
+method: searched
+source: https://regscale.readme.io/llms.txt
+limit_count: 0
+note: >-
+  No published rate limits. RegScale's documentation index carries no rate-limit, quota or
+  throttling page, and its own first-party client (regscale-cli 6.42.0.0) neither reads nor
+  logs any RateLimit-* / X-RateLimit-* / Retry-After response header - it manages load with a
+  client-side retry policy and circuit breaker instead. This is consistent with the delivery
+  model: RegScale runs in the customer's own tenant (SaaS, hybrid or on-premises), so capacity
+  is a deployment property rather than a published product limit. Recorded as an honest zero,
+  not as unlimited.
+response_headers: []
+status_on_exhaustion: null
+client_side_controls:
+  detail: >-
+    RegScale ships concurrency and resilience controls in the client rather than signalling
+    limits from the server.
+  observed:
+  - control: GraphQL page fan-out semaphore
+    value: 5 concurrent requests (default)
+    source: 'regscale-cli 6.42.0.0 - regscale/core/utils/ASYNC_GRAPHQL_CLIENT.md'
+  - control: GraphQL page size
+    value: 50 items (default take)
+    source: 'regscale-cli 6.42.0.0 - regscale/core/utils/ASYNC_GRAPHQL_CLIENT.md'
+  - control: gRPC batch size
+    value: 500 items per chunk (default)
+    source: 'regscale-cli 6.42.0.0 - regscale/core/grpc/client.py'
+  - control: gRPC max message size
+    value: 50 MB send and receive (protobuf default of 4 MB is raised)
+    source: 'regscale-cli 6.42.0.0 - regscale/core/grpc/client.py'
+  - control: gRPC unary RPC timeout
+    value: 300 seconds (default)
+    source: 'regscale-cli 6.42.0.0 - regscale/core/grpc/client.py'
+  - control: retry policy + circuit breaker
+    value: present
+    source: 'regscale-cli 6.42.0.0 - regscale/core/resilience/retry_policy.py, circuit_breaker.py'
+limits: []

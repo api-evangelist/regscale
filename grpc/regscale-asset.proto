@@ -1,0 +1,152 @@
+syntax = "proto3";
+
+package regscale.assets.v1;
+
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+message AssetBase {
+  string uuid = 1;
+  string name = 2;
+  string other_tracking_number = 3;
+  string serial_number = 4;
+  string ip_address = 5;
+  string ipv6_address = 6;
+  string mac_address = 7;
+  string location = 8;
+  string manufacturer = 9;
+  string model = 10;
+  string cpu = 11;
+  string ram = 12;
+  string disk_storage = 13;
+  string operating_system = 14;
+  string os_version = 15;
+  string asset_type = 16;
+  string management_type = 17;
+  string cmmc_asset_type = 18;
+  string asset_category = 19;
+  optional int32 asset_owner_id = 20;
+  optional int32 system_administrator_id = 21;
+  string software_vendor = 22;
+  string software_name = 23;
+  string software_version = 24;
+  string software_acronym = 25;
+  string software_function = 26;
+  string patch_level = 27;
+  string cpe = 28;
+  string aws_identifier = 29;
+  string azure_identifier = 30;
+  string google_identifier = 31;
+  string other_cloud_identifier = 32;
+  string qualys_id = 33;
+  string sicura_id = 34;
+  string tenable_id = 35;
+  string wiz_id = 36;
+  string scanning_tool = 37;
+  optional google.protobuf.Timestamp purchase_date = 38;
+  optional google.protobuf.Timestamp end_of_life_date = 39;
+  optional google.protobuf.Timestamp last_date_allowed = 40;
+  string status = 41;
+  string approval_status = 42;
+  string network_approval = 43;
+  string process_status = 44;
+  bool is_public = 45;
+  bool b_virtual = 46;
+  bool b_public_facing = 47;
+  bool b_authenticated_scan = 48;
+  bool b_latest_scan = 49;
+  bool b_ia_enabled = 50;
+  bool b_fam_accepted = 51;
+  bool b_externally_authorized = 52;
+  optional int32 diagram_level = 53;
+  string description = 54;
+  string notes = 55;
+  string net_bios = 56;
+  string baseline_configuration = 57;
+  string fqdn = 58;
+  string uri = 59;
+  string asset_tag_number = 60;
+  string vlan_id = 61;
+  string firmware_version = 62;
+  string purpose = 63;
+  optional int32 facility_id = 64;
+  optional int32 org_id = 65;
+  string emass_id = 66;
+  string batch_import_uuid = 67;
+  optional int32 parent_id = 68;
+  string parent_module = 69;
+}
+
+message AssetUpsert {
+  regscale.assets.v1.AssetBase base = 1;
+  string source = 2;
+}
+
+message BatchCreateOrUpdateOptions {
+  string source = 1;
+  string batch_import_uuid = 2;
+  repeated string unique_key_fields = 3;
+  bool enable_mop_up = 4;
+  string mop_up_status = 5;
+  int32 batch_size = 6;
+  optional int32 parent_id = 7;
+  string parent_module = 8;
+}
+
+message BatchCreateOrUpdateAssetsRequest {
+  repeated regscale.assets.v1.AssetUpsert assets = 1;
+  optional regscale.assets.v1.BatchCreateOrUpdateOptions options = 2;
+}
+
+message StreamBatchCreateOrUpdateAssetsRequest {
+  repeated regscale.assets.v1.AssetUpsert assets = 1;
+  optional regscale.assets.v1.BatchCreateOrUpdateOptions options = 2;
+}
+
+message AssetResponse {
+  int32 id = 1;
+  regscale.assets.v1.AssetBase base = 2;
+  string asset_owner = 3;
+  string system_administrator = 4;
+  string facility = 5;
+  string org = 6;
+  string created_by = 7;
+  string last_updated_by = 8;
+  string created_by_id = 9;
+  optional google.protobuf.Timestamp date_created = 10;
+  string last_updated_by_id = 11;
+  optional google.protobuf.Timestamp date_last_updated = 12;
+}
+
+message BatchCreateOrUpdateAssetsResponse {
+  repeated regscale.assets.v1.AssetResponse created = 1;
+  repeated regscale.assets.v1.AssetResponse updated = 2;
+  int32 total_processed = 3;
+  bool is_successful = 4;
+  string error_message = 5;
+  int64 processing_time_ms = 6;
+  map<string, int32> statistics = 7;
+}
+
+message BatchProcessingError {
+  int32 item_index = 1;
+  string error_message = 2;
+  string exception_type = 3;
+  google.protobuf.Timestamp timestamp = 4;
+  string stack_trace = 5;
+}
+
+message StreamBatchCreateOrUpdateAssetsResponse {
+  int32 chunk_number = 1;
+  int32 chunk_size = 2;
+  int32 processing_time_ms = 3;
+  bool is_successful = 4;
+  string error_message = 5;
+  repeated regscale.assets.v1.AssetResponse items = 6;
+  google.protobuf.Timestamp timestamp = 7;
+  repeated regscale.assets.v1.BatchProcessingError errors = 8;
+  int32 processed_count = 9;
+  int32 success_count = 10;
+  int32 error_count = 11;
+  map<string, google.protobuf.Value> metadata = 12;
+}

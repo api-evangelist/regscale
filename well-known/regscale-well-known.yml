@@ -1,0 +1,76 @@
+generated: '2026-08-26'
+method: probed
+source: live HTTP probe of every host named in apis.yml
+hit_count: 0
+note: >-
+  No /.well-known/ document is served by any RegScale host. regscale.com returns a
+  genuine HTTP 404 (WordPress 404 page) on every probed path. trust.regscale.com is a
+  single-page application whose catch-all answers HTTP 200 with the identical 45,359-byte
+  HTML shell for EVERY /.well-known/* path, including paths that cannot exist - that is a
+  soft-404, not a served document, so nothing was saved and no WellKnown or SecurityTxt
+  pointer is emitted. The RegScale application itself is customer-tenanted, so any
+  tenant-side .well-known surface is not publicly reachable at a vendor host.
+soft_404_control:
+  host: https://trust.regscale.com
+  path: /.well-known/openid-configuration
+  status: 200
+  bytes: 45359
+  identical_bytes_on_every_path: true
+  verdict: catch-all SPA shell; treated as a miss
+hosts:
+- host: https://regscale.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://regscale.readme.io
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 0
+    note: no response (connection not completed); one attempt, not retried
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://trust.regscale.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: SPA catch-all shell, not a document; no file saved
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: SPA catch-all shell, not a document; no file saved
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    note: SPA catch-all shell, not a document; no file saved
+  - path: /.well-known/api-catalog
+    status: 200
+    note: SPA catch-all shell, not a document; no file saved
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: SPA catch-all shell, not a document; no file saved
+  - path: /.well-known/agent-card.json
+    status: 200
+    note: SPA catch-all shell, not a document; no file saved
+  - path: /.well-known/agent.json
+    status: 200
+    note: SPA catch-all shell, not a document; no file saved

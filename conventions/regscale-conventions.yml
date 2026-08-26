@@ -1,0 +1,158 @@
+generated: '2026-08-26'
+method: derived
+source: 'regscale-cli 6.42.0.0 (PyPI, first-party) + grpc/*.proto + https://regscale.readme.io/reference/regscale-api-documentation'
+note: >-
+  RegScale publishes no retrievable OpenAPI document, so these cross-cutting semantics were
+  derived from RegScale's own first-party client (regscale-cli 6.42.0.0) and from its own
+  published gRPC contracts, corroborated where possible against the documentation index. Every
+  convention below is grounded in provider-published code or docs; nothing is inferred from a
+  generic REST house style.
+auth_style:
+  scheme: Bearer JWT in the Authorization header
+  detail: see authentication/regscale-authentication.yml
+  tenant_scoped: true
+  base_url_shape: 'https://<your-regscale-host>/api - the CLI default config ships "domain": "https://regscale.yourcompany.com/"'
+idempotency:
+  supported: true
+  mechanism: upsert-by-unique-key (no Idempotency-Key header)
+  header: null
+  detail: >-
+    RegScale's high-volume write surface is explicitly create-or-update rather than create.
+    Every ingestion service exposes BatchCreateOrUpdate, and the batch options message carries
+    `unique_key_fields` (the natural key the server matches on) plus a client-supplied
+    `batch_import_uuid`, so replaying the same batch converges on the same records instead of
+    duplicating them. The REST surface mirrors this with /api/{module}/batchCreateOrUpdate,
+    /api/assets/batchCreateOrUpdate, /api/issues/batchCreateOrUpdate and
+    /api/vulnerability/streamBatchCreateOrUpdate.
+  evidence:
+  - 'grpc/regscale-asset.proto - message BatchCreateOrUpdateOptions { string source; string batch_import_uuid; repeated string unique_key_fields; bool enable_mop_up; string mop_up_status; int32 batch_size; }'
+  - 'grpc/regscale-asset-service.proto - rpc BatchCreateOrUpdateAssets, rpc StreamBatchCreateOrUpdateAssets'
+  - 'regscale-cli 6.42.0.0 - /api/{model_slug}/batchCreateOrUpdate, /api/vulnerability/streamBatchCreateOrUpdate'
+  caveat: >-
+    This is idempotency by natural-key convergence, not by request replay token. There is no
+    documented retention window for `batch_import_uuid`, and a caller who omits
+    `unique_key_fields` gets create semantics.
+  retention: unknown
+pagination:
+  styles:
+  - surface: graphql
+    style: offset
+    params: [skip, take]
+    default_take: 50
+    response_fields: [items, totalCount, pageInfo.hasNextPage]
+    concurrency: >-
+      RegScale's own AsyncRegScaleGraphQLClient fans out pages with a semaphore (default 5
+      concurrent requests), which is the provider's stated pattern for large reads.
+    evidence: 'regscale-cli 6.42.0.0 - regscale/core/utils/ASYNC_GRAPHQL_CLIENT.md'
+  - surface: rest
+    style: path-segment
+    params: ['{intPage}', '{intPageSize}']
+    detail: >-
+      Paged REST endpoints carry the page and page size as URL path segments rather than
+      query parameters, e.g. /api/{module}/statusboard/{intID}/{strSearch}/{intPage}/{pageSize}
+      and /api/sbom/filterSBOMs/{intID}/{strModule}/{intPage}/{intPageSize}. Unpaged list
+      endpoints (getList, getAllByParent) return the full collection.
+    evidence: 'regscale-cli 6.42.0.0 - regscale/models/regscale_models/*'
+  - surface: grpc
+    style: server-side chunking
+    detail: 'Stream* RPCs return chunk_number / chunk_size / processed_count / success_count / error_count per chunk; the CLI default batch size is 500.'
+relationships:
+  convention: ParentId + ParentModule
+  detail: >-
+    Nearly every RegScale record is attached to a parent record by the pair
+    (parentId, parentModule) - the integer id of the parent plus the string module name.
+    This single convention replaces per-resource nested routes: /api/{module}/getAllByParent/{intParentID}/{strModule}
+    is the generic child-collection read, and the same pair appears in the gRPC AssetBase
+    message (parent_id, parent_module) and BatchCreateOrUpdateOptions.
+  evidence:
+  - 'grpc/regscale-asset.proto - optional int32 parent_id = 68; string parent_module = 69;'
+  - https://regscale.readme.io/reference/regscale-api-documentation
+metadata:
+  custom_fields: >-
+    Tenants can define custom fields per module (/api/customFields/module/{tenant_id}/{moduleId},
+    /api/customFieldsData/) and shape forms with the Form Builder, so the effective schema of a
+    record is tenant-dependent.
+  tags: 'Tag Manager with OSCAL-compatible export tags (https://regscale.readme.io/docs/setup-tags)'
+audit_fields:
+  fields: [created_by, created_by_id, date_created, last_updated_by, last_updated_by_id, date_last_updated]
+  evidence: 'grpc/regscale-asset.proto - message AssetResponse'
+request_tracing:
+  request_id_header: null
+  detail: >-
+    No request-id response header is documented or read by the first-party client. The gRPC
+    client generates a uuid4 per call for its own logging, but it is not a server-echoed
+    correlation id. Batch operations instead correlate through `batch_import_uuid`.
+error_envelope:
+  format: not RFC 9457
+  http_codes:
+    '401': unauthenticated - token missing, expired or invalid
+    '403': unauthorized - authenticated but lacking the role/permission
+  batch_errors: >-
+    Batch and streaming ingestion return structured per-item failures rather than failing the
+    whole call: BatchProcessingError { item_index, error_message, exception_type, timestamp,
+    stack_trace }, alongside is_successful / error_message / error_count on the response.
+  evidence: 'grpc/regscale-asset.proto - message BatchProcessingError'
+versioning:
+  style: product-release, not URI or header versioned
+  detail: see lifecycle/regscale-lifecycle.yml
+  grpc_package_version: v1
+rate_limit_signaling:
+  headers: []
+  detail: >-
+    No rate-limit response headers are documented and none are read by the first-party client;
+    see rate-limits/regscale-rate-limits.yml. The client relies on its own retry policy and
+    circuit breaker (regscale/core/resilience/) rather than on a server signal.
+reversibility:
+  grade: documented
+  applicable: true
+  detail: >-
+    RegScale's write surface is mutable and deletable, so reversibility is in scope - but no
+    documented reversal window exists. Deletes are issued through /api/{module}/delete/{id} and
+    /api/{module}/batchDelete with no restore, undelete, recycle-bin or archive endpoint
+    anywhere in the first-party client, and no retention period is stated in the docs.
+  operations:
+  - action: overwrite a previously ingested record
+    reversal: re-run the batch with the corrected payload
+    operation: batchCreateOrUpdate / BatchCreateOrUpdateAssets
+    window: unbounded (upsert converges on the natural key; no window applies)
+    grade: verified
+    note: >-
+      This is the one genuinely reversible path - because ingestion is upsert-by-key, a wrong
+      value is corrected by re-sending, not by an undo operation.
+  - action: mop-up (close out records absent from a batch)
+    reversal: none documented
+    operation: BatchCreateOrUpdateOptions.enable_mop_up / mop_up_status
+    window: null
+    grade: none
+    note: >-
+      enable_mop_up transitions records that did NOT appear in the batch to mop_up_status. No
+      operation to reverse a mop-up is published; an agent that enables it on a partial batch
+      can transition records it never intended to touch.
+  - action: delete a record
+    reversal: none documented
+    operation: /api/{module}/delete/{id}, /api/{module}/batchDelete
+    window: null
+    grade: none
+  - action: workflow step approval
+    reversal: none documented
+    operation: /api/{module}/approveStep/{strUserId}
+    window: null
+    grade: none
+    note: >-
+      Governance actions are digitally signed for audit traceability, which is the opposite of
+      reversible by design; RegScale markets this as a feature, not a gap.
+  caveat: >-
+    NO reversal window is asserted here that RegScale does not publish. Where the window is
+    unknown it is recorded as null.
+dry_run_mode:
+  supported: unknown
+  detail: >-
+    No dry-run, preview or validate-only flag is documented on the write surface. The CLI has
+    diagnostic/compare commands (regscale compare, regscale catalog diagnostic) for catalogue
+    data, but they are not a server-side rehearsal of a write.
+cross_links:
+  authentication: authentication/regscale-authentication.yml
+  lifecycle: lifecycle/regscale-lifecycle.yml
+  rate_limits: rate-limits/regscale-rate-limits.yml
+  data_model: data-model/regscale-data-model.yml
+  contracts: [grpc/regscale-asset-service.proto, grpc/regscale-issue-service.proto, grpc/regscale-vuln-service.proto]

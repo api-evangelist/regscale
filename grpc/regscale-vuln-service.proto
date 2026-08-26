@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package regscale.vulns.v1;
+
+import "regscale/vulns/v1/vuln.proto";
+
+service VulnIngestionService {
+  rpc BatchUpsertVulns(regscale.vulns.v1.BatchUpsertVulnsRequest) returns (regscale.vulns.v1.BatchUpsertVulnsResponse);
+  rpc StreamBatchUpsertVulns(regscale.vulns.v1.StreamBatchUpsertVulnsRequest) returns (stream regscale.vulns.v1.StreamBatchUpsertVulnsResponse);
+}

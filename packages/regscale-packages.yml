@@ -1,0 +1,57 @@
+generated: '2026-08-26'
+method: searched
+source: https://pypi.org/project/regscale-cli/
+note: >-
+  RegScale publishes two first-party Python distributions on PyPI. No npm, RubyGems,
+  crates.io, NuGet, Maven Central or Packagist package was found under a RegScale name
+  or scope; the RegScale platform itself is customer-tenanted, so the CLI/SDK is the
+  distributed client. The github.com/regscale/rs-data repository referenced in the
+  rs-data README is private (HTTP 404), so PyPI is the only public distribution point.
+packages:
+- language: python
+  registry: pypi
+  name: regscale-cli
+  url: https://pypi.org/project/regscale-cli/
+  install: pip install regscale-cli
+  official: true
+  license: MIT
+  version: 6.42.0.0
+  published: '2026-08-26'
+  release_count: 320
+  requires_python: '>=3.11,<3.15'
+  summary: Command Line Interface (CLI) for bulk processing/loading data into RegScale
+  role: cli+sdk
+  extras:
+  - name: server
+    install: pip install "regscale-cli[server]"
+  - name: dev
+    install: pip install "regscale-cli[dev]"
+    note: adds the Sphinx developer-documentation generator (regscale-dev make-docs)
+  entry_points:
+  - regscale
+  - regscale-dev
+  - regscale-rest
+  - roh
+- language: python
+  registry: pypi
+  name: rs-data
+  url: https://pypi.org/project/rs-data/
+  install: pip install rs-data
+  official: true
+  version: 1.5.0
+  published: '2026-05-05'
+  release_count: 1
+  requires_python: '>=3.9'
+  summary: RegScale gRPC contract library — assets, issues, and vulnerabilities
+  role: grpc-contract
+  note: >-
+    Generated protobuf/gRPC stubs for the RegScale asset, issue and vulnerability
+    ingestion services. This is the distribution the grpc/ artifacts in this repo were
+    reconstructed from. A hard dependency of regscale-cli.
+registries_checked:
+- registry: npm
+  result: no first-party package (registry.npmjs.org/regscale -> 404; no @regscale scope found)
+- registry: pypi
+  result: 2 first-party packages found
+- registry: github-releases
+  result: github.com/regscale/rs-data is private (404); no public release artifacts

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package regscale.assets.v1;
+
+import "regscale/assets/v1/asset.proto";
+
+service AssetIngestionService {
+  rpc BatchCreateOrUpdateAssets(regscale.assets.v1.BatchCreateOrUpdateAssetsRequest) returns (regscale.assets.v1.BatchCreateOrUpdateAssetsResponse);
+  rpc StreamBatchCreateOrUpdateAssets(regscale.assets.v1.StreamBatchCreateOrUpdateAssetsRequest) returns (stream regscale.assets.v1.StreamBatchCreateOrUpdateAssetsResponse);
+}

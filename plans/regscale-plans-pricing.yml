@@ -1,0 +1,30 @@
+generated: '2026-08-26'
+method: searched
+source: https://regscale.com/
+plan_count: 0
+public_pricing: false
+note: >-
+  RegScale publishes no pricing tiers. https://regscale.com/pricing/ resolves with a 301 to
+  the site root (final URL https://regscale.com/, HTTP 200) - there is no pricing page at all,
+  not a page we failed to parse. Every commercial call to action on the site is "Get a Demo",
+  and the documentation distinguishes an "Enterprise Edition" entitlement for the support
+  ticket system, so the product is sold through a sales motion with negotiated enterprise
+  agreements. No trial, no self-serve sign-up, and no published per-seat or per-framework
+  rate was found.
+editions_referenced:
+- name: Enterprise Edition
+  price: null
+  source: https://regscale.readme.io/docs/opening-tickets
+  detail: named as the entitlement that includes the RegScale Support Ticket System; no price published
+deployment_models_offered:
+- SaaS (cloud-native, FedRAMP High authorized)
+- hybrid
+- on-premises / self-hosted
+evidence:
+- url: https://regscale.com/pricing/
+  status: 301
+  final_url: https://regscale.com/
+  final_status: 200
+- url: https://regscale.com/
+  status: 200
+plans: []

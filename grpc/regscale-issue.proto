@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+package regscale.issues.v1;
+
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+enum IssueSeverity {
+  ISSUE_SEVERITY_UNSPECIFIED = 0;
+  ISSUE_SEVERITY_LOW = 1;
+  ISSUE_SEVERITY_MODERATE = 2;
+  ISSUE_SEVERITY_HIGH = 3;
+  ISSUE_SEVERITY_CRITICAL = 4;
+}
+
+enum IssueStatus {
+  ISSUE_STATUS_UNSPECIFIED = 0;
+  ISSUE_STATUS_OPEN = 1;
+  ISSUE_STATUS_CLOSED = 2;
+  ISSUE_STATUS_DRAFT = 3;
+  ISSUE_STATUS_PENDING_SCREENING = 4;
+  ISSUE_STATUS_FALSE_POSITIVE = 5;
+  ISSUE_STATUS_RISK_ACCEPTED = 6;
+  ISSUE_STATUS_MITIGATED = 7;
+}
+
+message IssueBase {
+  string integration_finding_id = 1;
+  string external_id = 2;
+  string title = 3;
+  string description = 4;
+  string issue_type = 5;
+  regscale.issues.v1.IssueSeverity severity = 6;
+  regscale.issues.v1.IssueStatus status = 7;
+  string category = 8;
+  string asset_identifier = 9;
+  string asset_identifier_field = 10;
+  optional google.protobuf.Timestamp due_date = 11;
+  optional google.protobuf.Timestamp date_identified = 12;
+  string cci_ref = 13;
+  string rule_id = 14;
+  string rule_version = 15;
+  string vulnerability_number = 16;
+  string checklist_status = 17;
+  optional bool is_known_exploited = 18;
+  string source = 19;
+  map<string, google.protobuf.Value> metadata = 20;
+}
+
+message IssueUpsert {
+  regscale.issues.v1.IssueBase base = 1;
+  string source = 2;
+}
+
+message BatchUpsertIssuesOptions {
+  string source = 1;
+  string batch_import_uuid = 2;
+  repeated string unique_key_fields = 3;
+  int32 batch_size = 4;
+  optional int32 parent_id = 5;
+  string parent_module = 6;
+  bool enable_mop_up = 7;
+  string mop_up_status = 8;
+}
+
+message BatchUpsertIssuesRequest {
+  repeated regscale.issues.v1.IssueUpsert issues = 1;
+  optional regscale.issues.v1.BatchUpsertIssuesOptions options = 2;
+}
+
+message StreamBatchUpsertIssuesRequest {
+  repeated regscale.issues.v1.IssueUpsert issues = 1;
+  optional regscale.issues.v1.BatchUpsertIssuesOptions options = 2;
+}
+
+message IssueResponse {
+  int32 id = 1;
+  regscale.issues.v1.IssueBase base = 2;
+  string created_by = 3;
+  string last_updated_by = 4;
+  optional google.protobuf.Timestamp date_created = 5;
+  optional google.protobuf.Timestamp date_last_updated = 6;
+}
+
+message BatchUpsertIssuesResponse {
+  repeated regscale.issues.v1.IssueResponse created = 1;
+  repeated regscale.issues.v1.IssueResponse updated = 2;
+  int32 total_processed = 3;
+  bool is_successful = 4;
+  string error_message = 5;
+  int64 processing_time_ms = 6;
+  map<string, int32> statistics = 7;
+}
+
+message IssueBatchProcessingError {
+  int32 item_index = 1;
+  string error_message = 2;
+  string exception_type = 3;
+  google.protobuf.Timestamp timestamp = 4;
+  string stack_trace = 5;
+}
+
+message StreamBatchUpsertIssuesResponse {
+  int32 chunk_number = 1;
+  int32 chunk_size = 2;
+  int32 processing_time_ms = 3;
+  bool is_successful = 4;
+  string error_message = 5;
+  repeated regscale.issues.v1.IssueResponse items = 6;
+  google.protobuf.Timestamp timestamp = 7;
+  repeated regscale.issues.v1.IssueBatchProcessingError errors = 8;
+  int32 processed_count = 9;
+  int32 success_count = 10;
+  int32 error_count = 11;
+  map<string, google.protobuf.Value> metadata = 12;
+}

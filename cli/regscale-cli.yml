@@ -1,0 +1,144 @@
+generated: '2026-08-26'
+method: searched
+source: https://pypi.org/project/regscale-cli/
+docs: https://regscale.readme.io/docs/developer-documentation
+name: RegScale CLI
+package: packages/regscale-packages.yml
+version: 6.42.0.0
+released: '2026-08-26'
+license: MIT
+official: true
+summary: >-
+  RegScale's first-party command line interface and Python SDK. RegScale positions it as a
+  "side car" run on a CRON job or serverless function for advanced automation and bulk data
+  processing, and explicitly licenses it for redistribution inside other commercial software
+  to lower the cost of building RegScale integrations.
+install:
+- method: pip
+  command: pip install regscale-cli
+- method: pip-extra
+  command: pip install "regscale-cli[server]"
+  note: adds the libraries needed to run the CLI in server/REST mode
+- method: pip-extra
+  command: pip install "regscale-cli[dev]"
+  note: adds the Sphinx developer-documentation generator
+requires_python: '>=3.11,<3.15'
+binaries:
+- name: regscale
+  entry_point: regscale.regscale:cli
+  role: main CLI
+- name: regscale-dev
+  entry_point: regscale.dev.cli:cli
+  role: developer tooling, including `regscale-dev make-docs` which generates Sphinx SDK docs
+- name: regscale-rest
+  entry_point: regscale.core.server.flask_api:run_app
+  role: runs the CLI as a local Flask REST service
+- name: roh
+  entry_point: regscale.roh.cli:cli
+  role: Rules of Behavior tooling
+sdk_mode:
+  supported: true
+  detail: >-
+    The CLI doubles as the RegScale Python SDK. `regscale-dev make-docs` builds a browsable
+    Sphinx reference of the CLI's classes and methods so teams can write custom data scripts
+    against the RegScale API through the same model layer the CLI uses.
+  docs: https://regscale.readme.io/docs/developer-documentation
+command_groups:
+  platform:
+  - assessments
+  - assets
+  - catalog
+  - cleanup
+  - compare
+  - criticality_updater
+  - cve_cleanup
+  - evidence
+  - issues
+  - migrations
+  - model
+  - oscal
+  - pipeline
+  - set_permissions
+  - vulnerabilities
+  - stig
+  - stig_mapper
+  - import_all
+  - actions
+  frameworks_and_programs:
+  - emass
+  - emass_api
+  - fedramp
+  - nist
+  - cci_importer
+  - cisa
+  - rapid
+  - csam
+  - jcam
+  scanners_and_security_tools:
+  - alienvault
+  - aqua
+  - burp
+  - crowdstrike
+  - defender
+  - durosuite
+  - ecr
+  - edr
+  - fortify
+  - grype
+  - nexpose
+  - openscap
+  - panw
+  - prisma
+  - qualys
+  - qradar
+  - sarif
+  - sentinelone
+  - sicura
+  - snyk
+  - sonarcloud
+  - splunk
+  - tanium
+  - tenable
+  - trivy
+  - veracode
+  - wiz
+  - xray
+  - dependabot
+  cloud_and_data:
+  - aws
+  - azure
+  - gcp
+  - bigquery
+  - databricks
+  - ibm
+  - sap
+  identity_and_itsm:
+  - ad
+  - okta
+  - archer
+  - axonius
+  - gitlab
+  - jira
+  - jira_dc
+  - salesforce
+  - servicenow
+  - ticketing
+group_count: 74
+key_flows:
+- name: bulk ingest scanner findings
+  detail: 'each scanner group syncs assets, vulnerabilities and issues into a RegScale security plan, using batchCreateOrUpdate semantics'
+- name: OSCAL catalogue and profile management
+  detail: '`regscale catalog` + `regscale oscal` download, compare, diagnose and update digitized regulation catalogues'
+- name: FedRAMP / eMASS package generation
+  detail: '`regscale fedramp` and `regscale emass` produce and exchange authorization-package artifacts'
+- name: run as a local REST service
+  detail: '`regscale-rest` exposes the CLI over a local Flask API for embedding in pipelines'
+configuration:
+  file: init.yaml
+  key_fields:
+  - name: domain
+    default: https://regscale.yourcompany.com/
+    note: 'the tenant base URL - RegScale''s own shipped default, and the clearest published statement that the API host is customer-specific'
+  - name: token
+    note: JWT / Service Account PAT
+  secrets_backends: [aws-secrets-manager, environment variables]

@@ -1,0 +1,41 @@
+generated: '2026-08-26'
+method: searched
+source: https://regscale.readme.io/changelog
+versioning:
+  scheme: product-release
+  pattern: MAJOR.MINOR.PATCH.BUILD
+  current_platform: 6.33.2.2
+  current_cli: 6.42.0.0
+  docs: https://regscale.readme.io/changelog
+  note: >-
+    RegScale versions the PRODUCT, not the API path. There is no /v1/ or /v2/ segment and no
+    version header in the REST surface (paths are /api/<module>); the gRPC contracts are the
+    only versioned interface, carrying a v1 package segment (regscale.assets.v1,
+    regscale.issues.v1, regscale.vulns.v1). Platform and CLI release trains are numbered
+    independently and are currently a full minor apart.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: >-
+    No published deprecation or Sunset/Deprecation (RFC 8594) policy was found on
+    regscale.com or in the RegScale documentation index. Recorded as absent, not as
+    unsupported - a customer-tenanted product upgrades on the customer's schedule.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA page. RegScale sells enterprise agreements; the Enterprise Edition support
+    ticket system is documented at https://regscale.readme.io/docs/opening-tickets but no
+    uptime commitment is published.
+status_page: null
+status_page_probe:
+  url: https://status.regscale.com/
+  status: 0
+  note: no response - host did not resolve/connect on a single attempt; not retried
+support:
+  url: https://regscale.readme.io/docs/opening-tickets
+  scope: Enterprise Edition customers
+deprecated_operations: []
+release_cadence:
+  observed: multiple releases per month across both the platform and CLI trains
+  evidence: 'regscale-cli has 320 published PyPI releases; the readme changelog lists 6.32.0.4 (2026-08-13), 6.32.0.5 (2026-08-24) and 6.33.2.2 (2026-08-24)'

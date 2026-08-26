@@ -1,0 +1,249 @@
+# RegScale Documentation
+
+> Streamline your governance, risk, and compliance (GRC) processes with RegScale’s modern platform for shift-left security and compliance as code. RegScale’s Continuous Controls Monitoring (CCM) platform helps organizations stay audit-ready by continuously updating documentation and compliance artifacts in real time. Built as a cloud-native solution with full support for hybrid and on-premises environments, RegScale integrates seamlessly into your CI/CD pipelines—speeding up certification, reducing manual work, and lowering costs.
+
+Append .md to any documentation page URL to get its markdown version.
+
+## Guides
+- [General](https://regscale.readme.io/docs/setup-general.md): The General section contains high-level tenant configuration settings and license information. Administrators can customize the look and feel of the platform and manage key branding options.
+- [Classification](https://regscale.readme.io/docs/setup-classification.md): The Classification section allows you to define categories with associated confidentiality, integrity, and availability (CIA) values. These are commonly used in system categorization and risk workflows.
+- [Compliance Settings](https://regscale.readme.io/docs/compliance-settings.md): Compliance Settings let you complete compliance activities using each framework’s native language. With Compliance Rollup, you can report across multiple frameworks while preserving their unique taxonomies.
+- [Email Settings](https://regscale.readme.io/docs/email.md): RegScale supports integration with customer email systems using SMTP. Email configuration is required for user registration workflows and for sending alerts across the system.
+- [Single Sign-On (SSO)](https://regscale.readme.io/docs/setup-single-sign-on-sso.md): This guide describes how to configure Single Sign-On (SSO) for RegScale using industry-standard authentication protocols. It includes setup instructions for OAuth (including Azure AD and Okta) and SAML configurations.  SSO allows users to sign in to RegScale using credentials from a centralized Identity and Access Management (IAM) solution. This enables centralized user management, support for Multi-Factor Authentication (MFA), integration with enterprise authentication monitoring tools, and improved security through adaptive authentication methods.  RegScale supports both OAuth 2.0 and SAML for SSO.
+- [Theming and Branding](https://regscale.readme.io/docs/setup-theming-and-branding.md): Theming and branding allow partners and customers to set up RegScale to match their organization’s identity. These features enable quick deployment of branded compliance platforms without requiring code changes. Common use cases include managed security service providers (MSSPs), system integrators (SIs), and cyber advisory firms delivering consistent, tailored user experiences while maintaining control over visual presentation.
+- [Setup User Management and Roles](https://regscale.readme.io/docs/identity-and-access-management.md): RegScale offers flexible tools for managing users, groups, and roles to align access with your organizational needs.
+- [Multi-Factor Authentication (MFA)](https://regscale.readme.io/docs/multi-factor-authentication-mfa.md)
+- [Security Policies](https://regscale.readme.io/docs/setup-security-policies.md): RegScale offers configurable security policies to align with your organization’s risk tolerance and user experience requirements. While secure by default, administrators can further tailor settings using the built-in policy engine.
+- [Cause Codes](https://regscale.readme.io/docs/setup-cause-codes.md): Cause Codes allow you to define standardized codes for use in the Causal Analysis module. These codes help categorize and trace the root causes of issues across your organization.
+- [Facilities](https://regscale.readme.io/docs/setup-facilities.md): The Facilities section (Facility Manager) allows administrators to define physical locations for use across modules. Once added, facilities can be linked to module records via the Basic Info section under Data Entry.
+- [File System](https://regscale.readme.io/docs/setup-file-system.md): The File System Config section defines upload limits and acceptable file types across the platform.
+- [Functional Roles](https://regscale.readme.io/docs/functional-roles.md): The Functional Role Manager allows you to define named roles that can be reused in workflows for routing, notifications, and approvals.
+- [Modules and Features](https://regscale.readme.io/docs/setup-modules-and-features.md): The Modules and Features section allows administrators to enable or disable platform modules and RegScale feature flags based on organizational needs.
+- [Risk Model](https://regscale.readme.io/docs/setup-risk-configuration.md): Risk Configuration allows administrators to define custom risk and opportunity models, configure scoring logic, and tailor assessment criteria based on organizational standards.
+- [Tags](https://regscale.readme.io/docs/setup-tags.md): The Tag Manager allows administrators to create and manage tags for organizing files and enabling OSCAL-compatible exports. RegScale includes a predefined set of system tags to support FedRAMP and other compliance frameworks.
+- [Service Accounts](https://regscale.readme.io/docs/service-accounts-1.md): Service accounts allow administrators to generate Personal Access Tokens (PATs) for automated, programmatic access to RegScale APIs.
+- [Logs and Utilization](https://regscale.readme.io/docs/logs-and-utilization.md)
+- [Security](https://regscale.readme.io/docs/security.md): This section describes how to configure RegScale securely using defense-in-depth principles across multiple layers.
+- [Form Builder](https://regscale.readme.io/docs/form-builder.md): Form Builder allows you to customize the layout and behavior of forms for each module. You can rename modules, group fields into sections, and control the order, visibility, and requirements for each field.
+- [Form Builder User Guide](https://regscale.readme.io/docs/form-builder-user-guide.md)
+- [Rules User Guide](https://regscale.readme.io/docs/rules-user-guide.md)
+- [Export Builder](https://regscale.readme.io/docs/export-builder.md): The Export Builder is RegScale's comprehensive document generation system that enables users to create customized DOCX (Microsoft Word) and XLSX (Microsoft Excel) exports by mapping RegScale form fields to placeholder tags in Word templates. The system supports advanced filtering, multiple templates, and automated field mapping to generate polished, compliance-ready documents directly from your RegScale data.
+- [Creating an Export Builder  DOCX Template](https://regscale.readme.io/docs/creating-an-export-builder-docx-template.md): Export Builder templates are DOCX files that define the structure and formatting of your exported documents. You add placeholder tags in the format `{{field_name}}` that will be replaced with RegScale data during export generation.
+- [Wayfinder Builder](https://regscale.readme.io/docs/wayfinder-builder.md): Wayfinder Builder allows organizations to define and manage step-by-step compliance guides tailored to their internal processes or regulatory frameworks. These templates enable structured task tracking for certifications and audits.
+- [Report Builder](https://regscale.readme.io/docs/report-builder.md): Report Builder enables users to create customizable reports and visualizations using compliance and risk data in RegScale. Reports support continuous control monitoring and audit readiness by enabling quick access to filtered, structured insights.
+- [Dashboard Builder](https://regscale.readme.io/docs/dashboard-builder.md): Use the Dashboard Builder to create custom dashboards with configurable widgets and reports.
+- [Questionnaire Builder](https://regscale.readme.io/docs/questionnaire-builder.md): The Questionnaire Builder allows users to create, assign, complete, and review structured questionnaires for assessments, audits, and compliance verification.
+- [Questionnaire Overview](https://regscale.readme.io/docs/questionnaire-overview.md)
+- [Visual Rules Engine - User Guide](https://regscale.readme.io/docs/visual-rules-engine-user-guide.md)
+- [RegML (AI)](https://regscale.readme.io/docs/ai-regml.md): RegML represents RegScale's machine learning and artificial intelligence platform designed to address significant compliance challenges. The system is available for both SaaS cloud customers and as a locally deployable option for organizations with adequate computational resources.
+- [Control AI Features](https://regscale.readme.io/docs/control-level-features.md): Control-Level Features apply to individual security controls or control implementations.
+- [RegML Author](https://regscale.readme.io/docs/regml-author.md): RegML Author provides first-draft control implementation statements, suggests improvements, and identifies possible compliance issues.
+- [RegML Explainer](https://regscale.readme.io/docs/regscale-regml-explainer.md): RegML Explainer provides personalized explanations of security controls.
+- [SSP AI Features](https://regscale.readme.io/docs/ssp-level-features.md): System Security Plans have several features that can be applied in bulk across all the controls in the plan.
+- [RegML SSP Author](https://regscale.readme.io/docs/regml-extractor.md): AI-powered control implementation statement generation using RegML background processing
+- [RegML Auditor](https://regscale.readme.io/docs/regml-auditor.md): RegML Auditor evaluates the completeness and quality of control implementations for a security plan.
+- [AI Generator](https://regscale.readme.io/docs/regml-ssp-generator.md): AI-powered System Security Plan (SSP) auto-generation using questionnaire-based context
+- [Response Automation](https://regscale.readme.io/docs/response-automation.md): AI-empowered resource to automate answering external security and risk assessment questionnaires.
+- [Evidence Mapping](https://regscale.readme.io/docs/evidence-mapping.md): Link evidence documents to security controls, security plans, and system components to demonstrate compliance.
+- [AI Policy Builder](https://regscale.readme.io/docs/ai-policy-builder.md): AI powered tool to create standardized policies from security profiles and catalogs.
+- [Compliance Exports](https://regscale.readme.io/docs/generating-compliance-exports.md): Automatically generating compliance exports helps organizations ensure accuracy and consistency in compliance documentation, save significant time and resources by reducing manual documentation efforts, maintain audit readiness through up-to-date, standardized compliance records, and easily integrate and share compliance data within existing compliance management systems.
+- [eMASS Exports](https://regscale.readme.io/docs/emass-exports.md)
+- [eMASS Hardware Software List Export (.xlsx)](https://regscale.readme.io/docs/emass-hardware-software-list-export-xlsx.md)
+- [eMASS POAMs Export (.xlsx)](https://regscale.readme.io/docs/emass-poams-export-xlsx.md)
+- [eMASS Ports and Protocols Export (.xlsx)](https://regscale.readme.io/docs/emass-ports-and-protocols-export-xlsx.md)
+- [eMASS SAP/SAR Export (.xlsx)](https://regscale.readme.io/docs/emass-sapsar-export-xlsx.md)
+- [eMASS SLCM Export (.xlsx)](https://regscale.readme.io/docs/emass-sapsar-export-xlsx-copy.md)
+- [FedRAMP Exports](https://regscale.readme.io/docs/fedramp-exports.md)
+- [FedRAMP CIS/CRM Export (.xlsx)](https://regscale.readme.io/docs/fedramp-ciscrm-export-xlsx.md)
+- [FedRAMP Inventory Export (.xlsx)](https://regscale.readme.io/docs/fedramp-test-case-procedure-export-xlsx-copy.md)
+- [FedRAMP POAMs Export (.xlsx)](https://regscale.readme.io/docs/fedramp-poams-export-xlsx.md)
+- [FedRAMP Risk Exposure Export (.xlsx)](https://regscale.readme.io/docs/fedramp-risk-exposure-export-xlsx.md)
+- [FedRAMP Test Case Procedure Export (.xlsx)](https://regscale.readme.io/docs/fedramp-test-case-procedure-export-xlsx.md)
+- [Automation Manager](https://regscale.readme.io/docs/optional-integrations.md)
+- [AD/LDAP](https://regscale.readme.io/docs/adldap.md)
+- [Microsoft Teams](https://regscale.readme.io/docs/microsoft-teams.md)
+- [Slack](https://regscale.readme.io/docs/slack.md)
+- [Webhooks](https://regscale.readme.io/docs/webhooks.md)
+- [Tenable IO](https://regscale.readme.io/docs/tenable-io.md)
+- [Utilities](https://regscale.readme.io/docs/utilities.md): RegScale’s Utilities streamline complex tasks across the platform. These tools reduce manual effort, enforce consistency, and automate key compliance processes.  ##
+- [Builder Utility](https://regscale.readme.io/docs/builders.md): The Builder utility simplifies adding Control Implementations and Requirements by applying Security Profiles and Catalogs. Use it to quickly populate Security Plans, Projects, Policies, and Supply Chain records—ensuring speed, consistency, and reduced manual effort.
+- [Inheritance Utility](https://regscale.readme.io/docs/inheritance.md): The Inheritance utility provides the ability to inherit Control Implementations from an existing Security Plan or Policy. This streamlines control reuse across systems and components, minimizing manual effort and accelerating compliance.  Use inheritance to tier systems (e.g., components under a system-level Security Plan), reduce redundant work, and align with cloud compliance models like FedRAMP.
+- [Categorization Utility](https://regscale.readme.io/docs/categorization.md): The Categorization utility dynamically applies controls to Security Plans or Components based on structured assessments. It supports a risk-based approach aligned with NIST RMF Steps 1 and 2 (Categorize and Select Controls).  Use Categorization to automate control selection, reduce manual effort, and improve consistency in system authorization packages.
+- [Deviations Utility](https://regscale.readme.io/docs/deviations.md): The Deviations utility supports the FedRAMP deviation process by managing exceptions to standard security controls. It helps document and justify non-compliance due to technical or business constraints, enabling secure and authorized exceptions within cloud environments.  Use this utility to automate deviation handling, link directly to issues and POAMs, and streamline FedRAMP reporting.
+- [Date Extension Requests Utility](https://regscale.readme.io/docs/date-extension-requests.md): The Date Extension Request utility allows users to request revised due dates for Assessments, Issues, or Tasks that require more time to complete. It supports formal workflows for justification and approval, ensuring auditability and accountability in the extension process.
+- [Recurrence Utility](https://regscale.readme.io/docs/scheduling.md): The Recurrence Utility automates the scheduling of recurring items such as Assessments, Data Calls, and Corrective Action Tasks. Use it to reduce manual effort and ensure deadlines are met consistently.
+- [Control Mapping Utility](https://regscale.readme.io/docs/transformer.md): The Control Mapping Utility provides organizations the ability to map controls between catalogues, enabling reuse of assessment data across multiple frameworks. This reduces redundant work and simplifies the creation of crosswalked SSPs (e.g., NIST to ISO).  Use it to create a single Security Plan or Assessment against one standard, and automatically align with controls from other mapped standards.
+- [Subsystems](https://regscale.readme.io/docs/subsystems.md): Subsystems are standardized features available across all RegScale modules. They support collaboration, tracking, classification, relationships, and other key functions tied to a specific record.
+- [Comments Subsystem](https://regscale.readme.io/docs/mentions.md): The Comment Subsystem allows users to post messages directly on any record across modules. It’s available in the  Subsystem section of every record.
+- [Files Subsystem](https://regscale.readme.io/docs/files.md): The File Subsystem allows users to upload, manage, and organize files on any record. It is available under the Subsystem section of each module.
+- [Links Subsystem](https://regscale.readme.io/docs/links-subsystem.md): The  Links Subsystem allows users to associate external or internal URLs with a specific record. This enables quick access to related systems, documentation, or resources directly from within RegScale.
+- [Kanban Subsystem](https://regscale.readme.io/docs/kanban-subsystem.md)
+- [History Subsystem](https://regscale.readme.io/docs/history.md): The History Subsystem provides an audit log of all actions taken on a record, including views, edits, comments, prints, and emails.
+- [Workflow Subsystem](https://regscale.readme.io/docs/workflow-subsystem.md): The  Workflow Subsystem allows you to start or build approval workflows directly from a record. Workflows can follow predefined paths or be created on demand.
+- [Classification Subsystem](https://regscale.readme.io/docs/classification.md): The Classification Subsystem allows users to apply and manage data classification values on a record, including confidentiality, integrity, and availability levels.
+- [Time Travel Subsystem](https://regscale.readme.io/docs/time-travel.md): The Time Travel Subsystem provides a cryptographically linked version history for each record, enabling users to view, validate, and revert changes over time. Each save creates an encrypted snapshot.
+- [Timeline Subsystem](https://regscale.readme.io/docs/timeline.md): The Timeline Subsystem allows users to record and visualize key events associated with a record.
+- [Relationship Subsystem](https://regscale.readme.io/docs/relationship-manager.md): The Relationship Subsystem allows users to create many-to-many links between records across modules. These connections enhance context, support AI features, and improve data modeling across the platform.
+- [Stakeholders Subsystem](https://regscale.readme.io/docs/stakeholders-subsystem.md): The Stakeholders Subsystem allows you to associate people or organizations with a record for accountability and communication.
+- [Properties Subsystem](https://regscale.readme.io/docs/properties-subsystem.md): The Properties Subsystem allows users to define key-value pairs on a record for storing custom metadata.
+- [Data Subsystem](https://regscale.readme.io/docs/data-subsystem.md): The Data Subsystem allows users to attach structured or unstructured data objects to a record using raw code input.
+- [Workflow](https://regscale.readme.io/docs/workflow.md)
+- [News Feed](https://regscale.readme.io/docs/news-feed.md)
+- [Workbench](https://regscale.readme.io/docs/workbench.md)
+- [3rd Party Risk](https://regscale.readme.io/docs/3rd-party-risk.md)
+- [Continuous Monitoring](https://regscale.readme.io/docs/continuous-monitoring.md)
+- [Evidence Management](https://regscale.readme.io/docs/evidence-management.md)
+- [Risk Management Framework (RMF)](https://regscale.readme.io/docs/risk-management-framework-rmf.md)
+- [App Management](https://regscale.readme.io/docs/app-management.md)
+- [Assets](https://regscale.readme.io/docs/assets.md)
+- [Assessments](https://regscale.readme.io/docs/assessments.md)
+- [Assessment Plans](https://regscale.readme.io/docs/assessment-plans.md)
+- [Capabilities](https://regscale.readme.io/docs/capabilities.md)
+- [Case Management](https://regscale.readme.io/docs/case-management.md)
+- [Catalogues](https://regscale.readme.io/docs/catalogues-1.md)
+- [Import Regscale Catalogs](https://regscale.readme.io/docs/import-regscale-catalogs.md): This guide explains how to import catalogs into RegScale using two methods: Import from System and Import from File.
+- [Causal Analysis](https://regscale.readme.io/docs/causal-analysis.md)
+- [Changes](https://regscale.readme.io/docs/changes.md)
+- [Components](https://regscale.readme.io/docs/components.md)
+- [Data Calls](https://regscale.readme.io/docs/data-calls.md)
+- [Evidence Locker](https://regscale.readme.io/docs/evidence-locker.md)
+- [Exceptions](https://regscale.readme.io/docs/exceptions.md)
+- [Incidents](https://regscale.readme.io/docs/incidents.md)
+- [Interconnections](https://regscale.readme.io/docs/interconnections.md)
+- [Issues](https://regscale.readme.io/docs/issues.md)
+- [Policies](https://regscale.readme.io/docs/policies.md)
+- [Programs](https://regscale.readme.io/docs/programs.md)
+- [Projects](https://regscale.readme.io/docs/projects.md)
+- [Questionnaires](https://regscale.readme.io/docs/questionnaires.md)
+- [Requests](https://regscale.readme.io/docs/requests.md)
+- [Requirements](https://regscale.readme.io/docs/requirements.md)
+- [Risks](https://regscale.readme.io/docs/risks.md)
+- [Security Controls](https://regscale.readme.io/docs/security-controls.md)
+- [Security Plans](https://regscale.readme.io/docs/security-plans.md)
+- [Security Profiles](https://regscale.readme.io/docs/security-profiles.md)
+- [Supply Chain](https://regscale.readme.io/docs/supply-chain.md)
+- [Tasks](https://regscale.readme.io/docs/tasks.md)
+- [Threats](https://regscale.readme.io/docs/threats.md)
+- [Threat Models](https://regscale.readme.io/docs/threat-models.md)
+- [Getting Started](https://regscale.readme.io/docs/overview.md)
+- [CLI Configuration File](https://regscale.readme.io/docs/cli-configuration-file.md)
+- [Orchestration and Scheduling](https://regscale.readme.io/docs/orchestration-and-scheduling.md)
+- [Running in a Docker Container](https://regscale.readme.io/docs/running-in-a-docker-container.md)
+- [Internal CLI Libraries](https://regscale.readme.io/docs/cli-libraries.md)
+- [About](https://regscale.readme.io/docs/about.md)
+- [Admin Actions](https://regscale.readme.io/docs/reminder.md)
+- [Assessment Editor](https://regscale.readme.io/docs/assessment-editor.md)
+- [Catalog Tools](https://regscale.readme.io/docs/catalog-tools.md)
+- [Compare](https://regscale.readme.io/docs/compare.md)
+- [Config](https://regscale.readme.io/docs/config.md)
+- [Control Editor](https://regscale.readme.io/docs/control-editor.md)
+- [Encrypt/Decrypt](https://regscale.readme.io/docs/encryptdecrypt.md)
+- [Evidence](https://regscale.readme.io/docs/evidence.md)
+- [Health Check](https://regscale.readme.io/docs/health-check.md)
+- [Import](https://regscale.readme.io/docs/migrations.md)
+- [Init](https://regscale.readme.io/docs/init.md)
+- [Issue (POA&M) Editor](https://regscale.readme.io/docs/issue-poam-editor.md)
+- [Login](https://regscale.readme.io/docs/login.md)
+- [Model](https://regscale.readme.io/docs/model.md)
+- [Bulk Set Permissions](https://regscale.readme.io/docs/bulk-set-permissions.md)
+- [Commercial CLI Libraries](https://regscale.readme.io/docs/cli-libraries-2.md)
+- [All Scanner Integrations](https://regscale.readme.io/docs/all-scanner-integrations.md)
+- [Amazon Web Services (AWS)](https://regscale.readme.io/docs/aws.md)
+- [Security Hub](https://regscale.readme.io/docs/amazon-web-services-aws.md)
+- [Authentication](https://regscale.readme.io/docs/authentication-3.md)
+- [Audit Manager](https://regscale.readme.io/docs/audit-manager.md)
+- [Asset Inventory](https://regscale.readme.io/docs/asset-inventory.md)
+- [Config](https://regscale.readme.io/docs/config-2.md)
+- [Key Management System (KMS)](https://regscale.readme.io/docs/key-management-system-kms.md)
+- [Identity and Access Management (IAM)](https://regscale.readme.io/docs/identity-and-access-management-iam.md)
+- [GuardDuty](https://regscale.readme.io/docs/guardduty.md)
+- [Organizations](https://regscale.readme.io/docs/organizations-1.md)
+- [Simple Storage Service (S3)](https://regscale.readme.io/docs/simple-storage-service-s3.md)
+- [CloudTrail](https://regscale.readme.io/docs/cloudtrail.md)
+- [CloudWatch](https://regscale.readme.io/docs/cloudwatch.md)
+- [Systems Manager](https://regscale.readme.io/docs/systems-manager.md)
+- [AWS Inspector V2](https://regscale.readme.io/docs/aws-inspector-v2.md): Collects Inspector V2 vulnerability findings, coverage data, and account status for compliance assessment. Designed for GovCloud clients without Security Hub.
+- [Aqua](https://regscale.readme.io/docs/aqua.md)
+- [Azure](https://regscale.readme.io/docs/azure.md)
+- [Axonius](https://regscale.readme.io/docs/axonius.md): RegScale CLI — Axonius V2 Integration
+- [Burp Suite](https://regscale.readme.io/docs/burp-suit.md)
+- [CrowdStrike Integration](https://regscale.readme.io/docs/crowdstrike.md): The RegScale CLI integrates with CrowdStrike Falcon to synchronize alerts, vulnerabilities, assets, compliance posture, and evidence into RegScale.
+- [Dependabot](https://regscale.readme.io/docs/dependabot.md)
+- [GitLab](https://regscale.readme.io/docs/gitlab.md)
+- [Google Cloud Provider (GCP)](https://regscale.readme.io/docs/google-cloud-provider-gcp.md): The RegScale CLI integrates with Google Cloud Platform to synchronize assets, security findings, and compliance data from GCP Security Command Center (SCC) into RegScale for continuous monitoring and compliance automation.
+- [Grype](https://regscale.readme.io/docs/grype.md)
+- [IBM AppScan](https://regscale.readme.io/docs/ibm-appscan.md)
+- [Jira](https://regscale.readme.io/docs/jira.md)
+- [Jira Data Center](https://regscale.readme.io/docs/jira-data-center-integration.md): The RegScale CLI Jira Data Center (on-premises) integration provides bidirectional synchronization of issues, tasks, attachments, and comments between Jira DC and RegScale. It also supports pushing RegScale issues into Jira and importing historical data from Jira XML/CSV exports.
+- [Microsoft Defender](https://regscale.readme.io/docs/microsoft-defender.md)
+- [Microsoft InTune](https://regscale.readme.io/docs/microsoft-intune.md)
+- [Nexpose (Rapid 7)](https://regscale.readme.io/docs/rapid-7-nexpose.md)
+- [NPM Audit](https://regscale.readme.io/docs/npm-audit.md)
+- [Okta](https://regscale.readme.io/docs/okta.md)
+- [OpenText](https://regscale.readme.io/docs/opentext.md)
+- [OpenSCAP](https://regscale.readme.io/docs/openscap-integration.md): The RegScale CLI OpenSCAP integration imports compliance scan results from OpenSCAP into RegScale as vulnerabilities and control assessments. It supports ARF (Asset Reporting Format), XCCDF, and CSV export formats, and can pull files from local disk or directly from an S3 bucket.
+- [Prisma](https://regscale.readme.io/docs/prisma.md)
+- [Qualys](https://regscale.readme.io/docs/qualys.md)
+- [Rapid7](https://regscale.readme.io/docs/rapid7.md)
+- [Salesforce](https://regscale.readme.io/docs/salesforce-cli.md)
+- [SARIF](https://regscale.readme.io/docs/sarif.md)
+- [ServiceNow](https://regscale.readme.io/docs/servicenow.md)
+- [Sicura](https://regscale.readme.io/docs/sicura.md)
+- [Snyk](https://regscale.readme.io/docs/snyk.md)
+- [SonarCloud](https://regscale.readme.io/docs/sonarcloud.md)
+- [STIG](https://regscale.readme.io/docs/stig.md)
+- [Tanium](https://regscale.readme.io/docs/regscale-cli-tanium-integration.md)
+- [Tenable Nessus](https://regscale.readme.io/docs/tenable-nessus.md)
+- [Tenable Security Center](https://regscale.readme.io/docs/tenable.md)
+- [Tenable Vulnerability Management (Formerly Tenable IO)](https://regscale.readme.io/docs/tenable-vulnerability-management-formerly-tenable-io.md)
+- [Trivy](https://regscale.readme.io/docs/trivy.md)
+- [Veracode](https://regscale.readme.io/docs/veracode.md)
+- [Wiz](https://regscale.readme.io/docs/wiz.md): This CLI is provided to perform batch processing and orchestration of the [Wiz.io Cloud-Native Application Protection Platform (CNAPP)](https://www.wiz.io/). It is designed to perform bulk processing of Wiz data to create, update, and otherwise sync with RegScale to allow for compliance automation reporting.
+- [Xray](https://regscale.readme.io/docs/xray.md)
+- [Extra CLI Libraries](https://regscale.readme.io/docs/extra-cli-libraries.md)
+- [Airflow](https://regscale.readme.io/docs/airflow.md)
+- [Server](https://regscale.readme.io/docs/server.md)
+- [Developer Documentation](https://regscale.readme.io/docs/developer-documentation.md)
+- [Public/Government CLI Libraries](https://regscale.readme.io/docs/cli-libraries-3.md)
+- [JCAM](https://regscale.readme.io/docs/csam.md): Integration for the Joint Cybersecurity Authorization Management (JCAM)
+- [DHS CISA](https://regscale.readme.io/docs/dhs-cisa.md)
+- [eMASS](https://regscale.readme.io/docs/emass-beta.md)
+- [FedRAMP](https://regscale.readme.io/docs/fedramp-beta.md)
+- [NIST Control Sort](https://regscale.readme.io/docs/nist-control-sort.md): This CLI feature will sort a catalog's controls in RegScale to match ASCII order sorting.
+- [NIST OSCAL](https://regscale.readme.io/docs/nist-oscal.md)
+- [Self-Hosting Installation](https://regscale.readme.io/docs/self-hosting-installation.md)
+- [Getting Started](https://regscale.readme.io/docs/getting-started.md)
+- [Sizing Guide](https://regscale.readme.io/docs/sizing-guide.md)
+- [Prerequisites](https://regscale.readme.io/docs/pre-requisites.md)
+- [Installation Options](https://regscale.readme.io/docs/installation-options-1.md)
+- [Local Eval (Docker Compose)](https://regscale.readme.io/docs/docker-compose.md)
+- [VM Based (Podman-Compose)](https://regscale.readme.io/docs/podman-compose.md)
+- [Azure Container Apps (ACA)](https://regscale.readme.io/docs/azure-aca.md)
+- [AWS ECS](https://regscale.readme.io/docs/aws-ecs.md)
+- [GCP Cloud Run](https://regscale.readme.io/docs/gcp-cloud-run.md)
+- [Kubernetes](https://regscale.readme.io/docs/kubernetes-deployment.md)
+- [Post-Deployment Steps](https://regscale.readme.io/docs/post-deployment-steps.md)
+- [Multi-Tenancy](https://regscale.readme.io/docs/multi-tenancy.md)
+- [Upgrade Guide](https://regscale.readme.io/docs/upgrade-guide.md)
+- [Rapid Certification](https://regscale.readme.io/docs/rapid-certification.md): How to get started using RegScale for Rapid Certification
+- [FedRAMP Continuous Monitoring in RegScale](https://regscale.readme.io/docs/fedramp-continuous-monitoring-in-regscale.md)
+- [Understanding the RegScale Information Architecture](https://regscale.readme.io/docs/understanding-the-regscale-information-architecture.md)
+- [Building Security Plans and Conducting Assessments](https://regscale.readme.io/docs/building-security-plans-and-conducting-assessments.md)
+- [Implementing the RMF](https://regscale.readme.io/docs/implementing-the-rmf.md)
+- [Understanding Cyber Security in RegScale](https://regscale.readme.io/docs/understanding-cyber-security-in-regscale.md)
+- [RegScale v6.32 UI Transition Guide](https://regscale.readme.io/docs/regscale-v632-ui-transition-guide.md): Seamlessly transition to the improved RegScale UI navigation experience
+- [Support](https://regscale.readme.io/docs/opening-tickets.md): Enterprise Edition customers can use the RegScale Support Ticket System to report technical or operational issues with the RegScale platform. Support Tickets are a benefit included with the Enterprise Edition.
+- [Subprocessor List](https://regscale.readme.io/docs/subprocessor-list.md): RegScale currently utilizes the following mandatory subprocessors for customers utilizing its hosted software and services.
+- [Third Party Software](https://regscale.readme.io/docs/third-party-software.md)
+
+## Changelog
+- [CLI 6.42.0](https://regscale.readme.io/changelog/cli-6420.md)
+- [RegScale 6.33.2.2](https://regscale.readme.io/changelog/regscale-63322.md)
+- [[6.32.0.5] 2026-08-24](https://regscale.readme.io/changelog/63205-2026-08-24.md)
+- [RegScale 6.33.2.1](https://regscale.readme.io/changelog/regscale-63321.md)
+- [RegScale 6.33.2.0](https://regscale.readme.io/changelog/regscale-63320.md)
+- [CLI 6.41.0](https://regscale.readme.io/changelog/cli-6410.md)
+- [RegScale 6.33.1.0](https://regscale.readme.io/changelog/regscale-63310.md)
+- [[6.32.0.4] 2026-08-13](https://regscale.readme.io/changelog/63204-2026-08-13.md)
+- [CLI](https://regscale.readme.io/changelog/cli-3.md)
+- [CLI 6.39.0](https://regscale.readme.io/changelog/cli-6390.md)

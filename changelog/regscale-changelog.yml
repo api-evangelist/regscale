@@ -1,0 +1,62 @@
+generated: '2026-08-26'
+method: searched
+source: https://regscale.readme.io/changelog
+docs: https://regscale.readme.io/changelog
+scheme: MAJOR.MINOR.PATCH.BUILD
+current_version: 6.33.2.2
+current_cli_version: 6.42.0.0
+trains:
+- name: platform
+  current: 6.33.2.2
+- name: cli
+  current: 6.42.0.0
+  registry: https://pypi.org/project/regscale-cli/
+note: >-
+  Recent window only, read from RegScale's published documentation index
+  (regscale.readme.io/llms.txt) plus the markdown rendering of the newest entry. The
+  changelog HTML pages bot-challenge an ordinary crawler (HTTP 429) so only the entry
+  whose .md rendering returned 200 carries a verified date and body; the remainder are
+  recorded as listed titles with their canonical URLs and no invented dates.
+entries:
+- version: 6.33.2.2
+  date: '2026-08-24'
+  url: https://regscale.readme.io/changelog/regscale-63322.md
+  breaking: false
+  fixes:
+  - Resolved an issue preventing users from logging in after a version upgrade, where a
+    missed Refresh on the version-update notification left a stale browser cache and blocked
+    sign-in (also affected users signed out for inactivity).
+  additions: []
+  verified: true
+- version: 6.42.0
+  train: cli
+  url: https://regscale.readme.io/changelog/cli-6420
+  verified: false
+  note: listed in the published changelog index; body not retrievable (HTTP 429)
+- version: 6.32.0.5
+  date: '2026-08-24'
+  url: https://regscale.readme.io/changelog/63205-2026-08-24
+  verified: false
+  note: date taken from the entry title as published in the changelog index
+- version: 6.33.2.1
+  url: https://regscale.readme.io/changelog/regscale-63321
+  verified: false
+- version: 6.33.2.0
+  url: https://regscale.readme.io/changelog/regscale-63320
+  verified: false
+- version: 6.41.0
+  train: cli
+  url: https://regscale.readme.io/changelog/cli-6410
+  verified: false
+- version: 6.33.1.0
+  url: https://regscale.readme.io/changelog/regscale-63310
+  verified: false
+- version: 6.32.0.4
+  date: '2026-08-13'
+  url: https://regscale.readme.io/changelog/63204-2026-08-13
+  verified: false
+  note: date taken from the entry title as published in the changelog index
+- version: 6.39.0
+  train: cli
+  url: https://regscale.readme.io/changelog/cli-6390
+  verified: false

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package regscale.issues.v1;
+
+import "regscale/issues/v1/issue.proto";
+
+service IssueIngestionService {
+  rpc BatchUpsertIssues(regscale.issues.v1.BatchUpsertIssuesRequest) returns (regscale.issues.v1.BatchUpsertIssuesResponse);
+  rpc StreamBatchUpsertIssues(regscale.issues.v1.StreamBatchUpsertIssuesRequest) returns (stream regscale.issues.v1.StreamBatchUpsertIssuesResponse);
+}

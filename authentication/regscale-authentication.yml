@@ -1,0 +1,69 @@
+generated: '2026-08-26'
+method: searched
+source: https://regscale.readme.io/docs/service-accounts-1
+docs: https://regscale.readme.io/docs/setup-single-sign-on-sso
+note: >-
+  Derived from RegScale's published documentation index (regscale.readme.io/llms.txt) and
+  corroborated against the first-party regscale-cli 6.42.0.0 client. There is no publicly
+  retrievable OpenAPI document, so securitySchemes were not read from a spec - every scheme
+  below is grounded in a named documentation page or in RegScale's own client code.
+summary:
+  types: [http, oauth2, openIdConnect, saml]
+  api_key_in: [header]
+  bearer_format: JWT
+  oauth2_flows: [authorizationCode]
+  oauth2_role: sso-only
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  in: header
+  parameter: Authorization
+  description: >-
+    Every RegScale API call carries a JSON Web Token in the Authorization header. Interactive
+    tokens are obtained by POSTing credentials to /api/authentication/login on the tenant and
+    are valid for 24 hours, carrying the permissions of the authenticated user. Token validity
+    can be checked at /api/authentication/validateToken.
+  sources:
+  - https://regscale.readme.io/reference/regscale-api-documentation
+  - 'regscale-cli 6.42.0.0: regscale/core/app/internal/login.py'
+- name: servicAccountPAT
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  in: header
+  parameter: Authorization
+  description: >-
+    For unattended and automated integrations, administrators create a Service Account under
+    Admin Panel -> Setup -> Service Accounts, which issues a long-running Personal Access
+    Token (PAT). Service Account tokens inherit Administrator privileges and do not consume
+    a user license. This is the credential the RegScale CLI and the gRPC ingestion services
+    are intended to run under.
+  scope: tenant-wide administrator
+  sources:
+  - https://regscale.readme.io/docs/service-accounts-1
+- name: sso
+  type: openIdConnect
+  description: >-
+    RegScale supports Single Sign-On for interactive users over OAuth 2.0 (documented for
+    Microsoft Entra ID / Azure AD and Okta) and SAML, with MFA enforced by the identity
+    provider. SSO governs human sign-in to the tenant; it is not the mechanism used for
+    programmatic API access, which uses the bearer JWT / Service Account PAT above.
+  sources:
+  - https://regscale.readme.io/docs/setup-single-sign-on-sso
+  - https://regscale.readme.io/docs/multi-factor-authentication-mfa
+- name: grpcCallCredentials
+  type: http
+  scheme: bearer
+  transport: grpc-tls
+  description: >-
+    The rs-data gRPC ingestion clients attach the same Bearer token as call credentials over
+    a TLS channel (grpc.ssl_channel_credentials()); an insecure plaintext channel is
+    available but off by default.
+  sources:
+  - 'regscale-cli 6.42.0.0: regscale/core/grpc/client.py'
+unauthorized_behaviour:
+  '401': unauthenticated - token missing, expired or invalid
+  '403': unauthorized - authenticated but lacking the required role or permission
+  source: https://regscale.readme.io/reference/regscale-api-documentation

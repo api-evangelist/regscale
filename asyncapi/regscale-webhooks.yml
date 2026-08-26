@@ -1,0 +1,40 @@
+generated: '2026-08-26'
+method: searched
+source: https://regscale.readme.io/llms.txt
+docs: https://regscale.readme.io/docs/webhooks
+spec_type: null
+asyncapi_published: false
+note: >-
+  RegScale documents a webhook surface: its own machine-readable documentation index
+  (regscale.readme.io/llms.txt, fetched 2026-08-26, HTTP 200) lists
+  "- [Webhooks](https://regscale.readme.io/docs/webhooks.md)" under Guides. The page body
+  itself could NOT be retrieved - the docs host bot-challenges an ordinary crawler with HTTP 429
+  ("Hello there, human!") on that path, on one attempt, not retried. So the existence of the
+  webhook surface is provider-published evidence; the event catalog behind it is not captured
+  and is deliberately left empty rather than guessed.
+  No AsyncAPI document was found on regscale.com, regscale.readme.io or in the RegScale GitHub
+  organization. The nearest thing to a published event contract RegScale ships is the
+  server-streaming half of its gRPC ingestion services (grpc/regscale-*-service.proto), which is
+  a streaming RPC rather than a pub/sub event surface.
+webhooks: []
+webhook_catalog_retrieved: false
+retrieval:
+- url: https://regscale.readme.io/llms.txt
+  status: 200
+  outcome: webhooks page listed in the provider's own docs index
+- url: https://regscale.readme.io/docs/webhooks.md
+  status: 429
+  outcome: bot challenge; body not retrievable
+related_streaming_surfaces:
+- name: AssetIngestionService.StreamBatchCreateOrUpdateAssets
+  contract: grpc/regscale-asset-service.proto
+  direction: server-streaming response
+- name: IssueIngestionService (streaming variant)
+  contract: grpc/regscale-issue-service.proto
+  direction: server-streaming response
+- name: VulnIngestionService (streaming variant)
+  contract: grpc/regscale-vuln-service.proto
+  direction: server-streaming response
+- name: 'REST: /api/vulnerability/streamBatchCreateOrUpdate'
+  source: regscale-cli 6.42.0.0
+  direction: streaming request

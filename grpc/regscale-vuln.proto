@@ -1,0 +1,129 @@
+syntax = "proto3";
+
+package regscale.vulns.v1;
+
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+enum VulnerabilitySeverity {
+  VULNERABILITY_SEVERITY_UNSPECIFIED = 0;
+  VULNERABILITY_SEVERITY_INFORMATIONAL = 1;
+  VULNERABILITY_SEVERITY_LOW = 2;
+  VULNERABILITY_SEVERITY_MODERATE = 3;
+  VULNERABILITY_SEVERITY_HIGH = 4;
+  VULNERABILITY_SEVERITY_CRITICAL = 5;
+}
+
+enum VulnerabilityStatus {
+  VULNERABILITY_STATUS_UNSPECIFIED = 0;
+  VULNERABILITY_STATUS_OPEN = 1;
+  VULNERABILITY_STATUS_CLOSED = 2;
+  VULNERABILITY_STATUS_FALSE_POSITIVE = 3;
+  VULNERABILITY_STATUS_RISK_ACCEPTED = 4;
+  VULNERABILITY_STATUS_DEVIATION_IN_PLACE = 5;
+  VULNERABILITY_STATUS_EXCEPTION_IN_PLACE = 6;
+  VULNERABILITY_STATUS_EXCEPTION_APPROVED = 7;
+  VULNERABILITY_STATUS_AWAITING_VENDOR_PATCH = 8;
+  VULNERABILITY_STATUS_MITIGATED = 9;
+}
+
+message VulnBase {
+  string plugin_id = 1;
+  string external_id = 2;
+  string cve = 3;
+  string title = 4;
+  string description = 5;
+  regscale.vulns.v1.VulnerabilitySeverity severity = 6;
+  regscale.vulns.v1.VulnerabilityStatus status = 7;
+  string category = 8;
+  optional double cvss_v2_score = 9;
+  optional double cvss_v3_score = 10;
+  string cvss_v2_vector = 11;
+  string cvss_v3_vector = 12;
+  optional double vpr_score = 13;
+  string ip_address = 14;
+  string dns = 15;
+  string port = 16;
+  string asset_identifier = 17;
+  string asset_identifier_field = 18;
+  optional google.protobuf.Timestamp first_seen = 19;
+  optional google.protobuf.Timestamp last_seen = 20;
+  optional google.protobuf.Timestamp scan_date = 21;
+  string affected_packages = 22;
+  string installed_versions = 23;
+  string fixed_versions = 24;
+  string fix_status = 25;
+  string affected_os = 26;
+  string package_path = 27;
+  string image_digest = 28;
+  string source = 29;
+  map<string, google.protobuf.Value> metadata = 30;
+}
+
+message VulnUpsert {
+  regscale.vulns.v1.VulnBase base = 1;
+  string source = 2;
+}
+
+message BatchUpsertVulnsOptions {
+  string source = 1;
+  string batch_import_uuid = 2;
+  repeated string unique_key_fields = 3;
+  int32 batch_size = 4;
+  optional int32 parent_id = 5;
+  string parent_module = 6;
+  bool enable_mop_up = 7;
+  string mop_up_status = 8;
+}
+
+message BatchUpsertVulnsRequest {
+  repeated regscale.vulns.v1.VulnUpsert vulns = 1;
+  optional regscale.vulns.v1.BatchUpsertVulnsOptions options = 2;
+}
+
+message StreamBatchUpsertVulnsRequest {
+  repeated regscale.vulns.v1.VulnUpsert vulns = 1;
+  optional regscale.vulns.v1.BatchUpsertVulnsOptions options = 2;
+}
+
+message VulnResponse {
+  int32 id = 1;
+  regscale.vulns.v1.VulnBase base = 2;
+  string created_by = 3;
+  string last_updated_by = 4;
+  optional google.protobuf.Timestamp date_created = 5;
+  optional google.protobuf.Timestamp date_last_updated = 6;
+}
+
+message BatchUpsertVulnsResponse {
+  repeated regscale.vulns.v1.VulnResponse created = 1;
+  repeated regscale.vulns.v1.VulnResponse updated = 2;
+  int32 total_processed = 3;
+  bool is_successful = 4;
+  string error_message = 5;
+  int64 processing_time_ms = 6;
+  map<string, int32> statistics = 7;
+}
+
+message VulnBatchProcessingError {
+  int32 item_index = 1;
+  string error_message = 2;
+  string exception_type = 3;
+  google.protobuf.Timestamp timestamp = 4;
+  string stack_trace = 5;
+}
+
+message StreamBatchUpsertVulnsResponse {
+  int32 chunk_number = 1;
+  int32 chunk_size = 2;
+  int32 processing_time_ms = 3;
+  bool is_successful = 4;
+  string error_message = 5;
+  repeated regscale.vulns.v1.VulnResponse items = 6;
+  google.protobuf.Timestamp timestamp = 7;
+  repeated regscale.vulns.v1.VulnBatchProcessingError errors = 8;
+  int32 processed_count = 9;
+  int32 success_count = 10;
+  int32 error_count = 11;
+  map<string, google.protobuf.Value> metadata = 12;
+}
