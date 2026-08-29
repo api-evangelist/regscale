@@ -11,6 +11,17 @@ description: 'RegScale is a Continuous Controls Monitoring (CCM) and compliance-
   an integration framework for 70+ scanners, cloud providers and ITSM tools, and holds
   FedRAMP High, SOC 2 Type 2, ISO 27001:2022, TX-RAMP Level 2 and CSA STAR credentials.'
 url: https://raw.githubusercontent.com/api-evangelist/regscale/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://regscale.com/wp-content/uploads/2024/04/cropped-Regscale-Favicon-192x192.png
 x-type: company
 x-source: harvest:secondary-market
