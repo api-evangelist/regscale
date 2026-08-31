@@ -1,0 +1,11 @@
+{
+  "repo": "regscale",
+  "feeds": [
+    {
+      "source": "https://regscale.readme.io/reference/regscale-api-documentation",
+      "error": "HTTPError"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-30T22:33:40Z"
+}
