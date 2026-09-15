@@ -1,15 +1,13 @@
 aid: regscale
 name: RegScale
-description: 'RegScale is a Continuous Controls Monitoring (CCM) and compliance-automation
-  company whose cloud-native, OSCAL-native GRC platform keeps organizations continuously
-  audit-ready by turning compliance documentation into living, machine-readable data.
-  The platform ships as a customer-tenanted deployment (SaaS, hybrid, or on-premises)
-  and exposes its data through three programmable surfaces: a JWT-authenticated REST
-  API under /api, a HotChocolate-style GraphQL endpoint at /graphql, and a published
-  gRPC contract library (rs-data) covering asset, issue and vulnerability ingestion.
-  RegScale also publishes a first-party Python CLI/SDK (regscale-cli) that doubles as
-  an integration framework for 70+ scanners, cloud providers and ITSM tools, and holds
-  FedRAMP High, SOC 2 Type 2, ISO 27001:2022, TX-RAMP Level 2 and CSA STAR credentials.'
+description: 'RegScale is a Continuous Controls Monitoring (CCM) and compliance-automation company whose
+  cloud-native, OSCAL-native GRC platform keeps organizations continuously audit-ready by turning compliance
+  documentation into living, machine-readable data. The platform ships as a customer-tenanted deployment
+  (SaaS, hybrid, or on-premises) and exposes its data through three programmable surfaces: a JWT-authenticated
+  REST API under /api, a HotChocolate-style GraphQL endpoint at /graphql, and a published gRPC contract
+  library (rs-data) covering asset, issue and vulnerability ingestion. RegScale also publishes a first-party
+  Python CLI/SDK (regscale-cli) that doubles as an integration framework for 70+ scanners, cloud providers
+  and ITSM tools, and holds FedRAMP High, SOC 2 Type 2, ISO 27001:2022, TX-RAMP Level 2 and CSA STAR credentials.'
 url: https://raw.githubusercontent.com/api-evangelist/regscale/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
@@ -56,15 +54,14 @@ tags:
 - Vulnerability Management
 - Government
 apis:
-- aid: regscale-rest-api
+- aid: regscale:regscale-rest-api
   name: RegScale REST API
-  description: 'The RegScale REST API is the primary programmable surface of the RegScale
-    platform. It is served from each customer''s own RegScale tenant under the /api
-    path, authenticated with a JSON Web Token obtained from /api/authentication/login
-    or with a long-lived Personal Access Token issued to a Service Account. Resources
-    follow a module/record model (security plans, controls, control implementations,
-    assessments, issues, POA&Ms, assets, catalogues, profiles, components, workflows)
-    and are related to one another through the ParentId + ParentModule convention.'
+  description: The RegScale REST API is the primary programmable surface of the RegScale platform. It
+    is served from each customer's own RegScale tenant under the /api path, authenticated with a JSON
+    Web Token obtained from /api/authentication/login or with a long-lived Personal Access Token issued
+    to a Service Account. Resources follow a module/record model (security plans, controls, control implementations,
+    assessments, issues, POA&Ms, assets, catalogues, profiles, components, workflows) and are related
+    to one another through the ParentId + ParentModule convention.
   humanURL: https://regscale.readme.io/reference/regscale-api-documentation
   baseURL: https://{your-instance}.regscale.com/api
   tags:
@@ -77,26 +74,24 @@ apis:
     url: https://regscale.readme.io/docs/overview
   - type: APIReference
     url: https://regscale.readme.io/reference/regscale-api-documentation
-- aid: regscale-graphql-api
+- aid: regscale:regscale-graphql-api
   name: RegScale GraphQL API
-  description: 'RegScale exposes a GraphQL endpoint at /graphql on each customer tenant,
-    used by the first-party RegScale CLI for high-volume paginated reads. Queries follow
-    the HotChocolate connection shape - items, totalCount and pageInfo with take/skip
-    paging and a where filter object - and are authenticated with the same Bearer token
-    as the REST API.'
+  description: RegScale exposes a GraphQL endpoint at /graphql on each customer tenant, used by the first-party
+    RegScale CLI for high-volume paginated reads. Queries follow the HotChocolate connection shape - items,
+    totalCount and pageInfo with take/skip paging and a where filter object - and are authenticated with
+    the same Bearer token as the REST API.
   humanURL: https://regscale.readme.io/docs/overview
   baseURL: https://{your-instance}.regscale.com/graphql
   tags:
   - GraphQL
   - Compliance
   - Security
-- aid: regscale-grpc-ingestion
+- aid: regscale:regscale-grpc-ingestion
   name: RegScale gRPC Ingestion Services
-  description: 'RegScale publishes a gRPC contract library, rs-data, covering three
-    high-volume ingestion services: AssetIngestionService, IssueIngestionService and
-    VulnIngestionService. Each service exposes a unary batch create-or-update RPC and
-    a server-streaming variant for chunked ingestion, with Bearer-token call credentials
-    over TLS.'
+  description: 'RegScale publishes a gRPC contract library, rs-data, covering three high-volume ingestion
+    services: AssetIngestionService, IssueIngestionService and VulnIngestionService. Each service exposes
+    a unary batch create-or-update RPC and a server-streaming variant for chunked ingestion, with Bearer-token
+    call credentials over TLS.'
   humanURL: https://pypi.org/project/rs-data/
   baseURL: https://{your-instance}.regscale.com
   tags:
@@ -188,12 +183,11 @@ x-enrichment:
 x-coverage:
   state: covered
   reason: null
-  detail: >-
-    RegScale publishes no OpenAPI, but STEP 0b did not come up empty: a first-party gRPC
-    contract library (rs-data 1.5.0 on PyPI) yielded three real services and six RPCs, and the
-    docs host serves a verbatim llms.txt. The one wall hit was the ReadMe docs host, which
-    bot-challenges an ordinary crawler with HTTP 429 on HTML and on most .md paths, so the
-    hosted API reference and the webhooks catalog could not be read.
+  detail: 'RegScale publishes no OpenAPI, but STEP 0b did not come up empty: a first-party gRPC contract
+    library (rs-data 1.5.0 on PyPI) yielded three real services and six RPCs, and the docs host serves
+    a verbatim llms.txt. The one wall hit was the ReadMe docs host, which bot-challenges an ordinary crawler
+    with HTTP 429 on HTML and on most .md paths, so the hosted API reference and the webhooks catalog
+    could not be read.'
   evidence:
   - url: https://regscale.readme.io/llms.txt
     status: 200
