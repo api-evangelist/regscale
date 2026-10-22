@@ -15,3 +15,64 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: regscale-pypi
+  label: PyPI
+  partner: pypi
+  partner_name: PyPI
+  category: official SDK (Python)
+  type: register
+  channel: package-registry
+  evidence: https://pypi.org/project/regscale-cli/
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: regscale-cli
+      version: 6.53.0.0
+      released: '2026-10-14'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/regscale-cli/
+      repo_leg: github-org:regscale
+      publisher_leg: email:regscale.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: regscale-cloud-security-alliance-star-registry
+  label: Cloud Security Alliance STAR Registry
+  partner_name: Cloud Security Alliance STAR Registry
+  category: Cloud security assurance
+  type: register
+  channel: standard-directory
+  evidence: https://cloudsecurityalliance.org/star/registry/regscale/services/regscale
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: CSA STAR Registry (cloudsecurityalliance.org/star/registry)
+    spec_file: null
+    standard: CSA STAR
+    role: star-level-1
+    registered_name: RegScale
+    registry_id: regscale
+    service_url: https://regscale.com/
+    matched_domain: regscale.com
+    matched_by: domain
+    identity_source: the service URL the organisation filed on its STAR listing (no lookup)
+    levels:
+    - STAR Level 1
+    certified_products: []
+    signal_note: STAR Level 1 (CAIQ self-assessment) = participation; certified_products = one entry per STAR Level
+      2 / STAR for AI Level 2 assessment TYPE (third-party certification, attestation, C-STAR, ValidAIted); lapsed
+      = every instance marked (Deprecated) by the registry; service counts never recorded
+    detected_by: sweep-compliance-assurance.py
+    detected: '2026-10-20'
+  status: not-a-workflow
+  arazzo: null
