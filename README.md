@@ -64,20 +64,120 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-RegScale is a Continuous Controls Monitoring (CCM) and compliance-automation company. Its
-cloud-native, OSCAL-native GRC platform keeps organizations continuously audit-ready by turning
-compliance documentation into living, machine-readable data, and it ships as a customer-tenanted
-deployment (SaaS, hybrid or on-premises).
+RegScale is a Continuous Controls Monitoring (CCM) and compliance-automation company whose cloud-native, OSCAL-native GRC platform keeps organizations continuously audit-ready by turning compliance documentation into living, machine-readable data. The platform ships as a customer-tenanted deployment (SaaS, hybrid, or on-premises) and exposes its data through three programmable surfaces: a JWT-authenticated REST API under /api, a HotChocolate-style GraphQL endpoint at /graphql, and a published gRPC contract library (rs-data) covering asset, issue and vulnerability ingestion. RegScale also publishes a first-party Python CLI/SDK (regscale-cli) that doubles as an integration framework for 70+ scanners, cloud providers and ITSM tools, and holds FedRAMP High, SOC 2 Type 2, ISO 27001:2022, TX-RAMP Level 2 and CSA STAR credentials.
 
-RegScale exposes three programmable surfaces: a JWT-authenticated REST API under `/api`, a
-GraphQL endpoint at `/graphql`, and a published gRPC contract library (`rs-data`) covering asset,
-issue and vulnerability ingestion. It also publishes a first-party Python CLI/SDK
-(`regscale-cli`) that doubles as an integration framework for 70+ scanners, cloud providers and
-ITSM tools.
+**Areas:** Company · Compliance · Governance Risk and Compliance · Continuous Controls Monitoring · Security · FedRAMP · OSCAL · Risk Management · Audit · Compliance as Code · Vulnerability Management · Government
 
-- Website: https://regscale.com/
-- Documentation: https://regscale.readme.io/docs/overview
-- API reference: https://regscale.readme.io/reference/regscale-api-documentation
-- GitHub: https://github.com/RegScale
-- CLI / SDK: https://pypi.org/project/regscale-cli/
-- gRPC contracts: https://pypi.org/project/rs-data/
+## RegScale on APIs.io
+
+Everything profiled for RegScale is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/regscale/](https://apis.io/providers/regscale/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [RegScale REST API](https://apis.io/apis/regscale/regscale-rest-api/) — The RegScale REST API is the primary programmable surface of the RegScale platform. It is served from each customer's own RegScale tenant under the /api…
+- [RegScale GraphQL API](https://apis.io/apis/regscale/regscale-graphql-api/) — RegScale exposes a GraphQL endpoint at /graphql on each customer tenant, used by the first-party RegScale CLI for high-volume paginated reads. Queries…
+- [RegScale gRPC Ingestion Services](https://apis.io/apis/regscale/regscale-grpc-ingestion/) — RegScale publishes a gRPC contract library, rs-data, covering three high-volume ingestion services: AssetIngestionService, IssueIngestionService and…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Regscale Webhooks](https://apis.io/asyncapis/regscale/regscale-webhooks/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Regscale Authentication](https://apis.io/security/regscale/regscale-authentication/)
+- [Regscale Domain Security](https://apis.io/security/regscale/regscale-domain-security/)
+- [Regscale Trust Center](https://apis.io/security/regscale/regscale-trust-center/)
+- [Regscale Vulnerability Disclosure](https://apis.io/security/regscale/regscale-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Regscale Plans Pricing](https://apis.io/plans/regscale/regscale-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Regscale Rate Limits](https://apis.io/rate-limits/regscale/regscale-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://regscale.com/)
+- [Documentation](https://regscale.readme.io/docs/overview)
+- [Getting started](https://regscale.readme.io/docs/overview)
+- [API reference](https://regscale.readme.io/reference/regscale-api-documentation)
+- [Support](https://regscale.readme.io/docs/opening-tickets)
+- [Changelog](https://regscale.readme.io/changelog)
+- [Blog](https://regscale.com/blog/)
+- [Security](https://regscale.com/security/)
+- [Compliance](https://regscale.com/security/)
+- [Trust centre](https://trust.regscale.com/)
+- [Terms of service](https://regscale.com/terms-of-service/)
+- [Privacy policy](https://regscale.com/privacy-policy/)
+- [GitHub](https://github.com/RegScale)
+
+## API Evangelist rating
+
+**Kin Score 46.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 28.9 |
+
+**Agent readiness 23.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | derived (partial credit) |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 35.3** — Government & Public Sector
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/regscale/](https://apis.io/providers/regscale/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for RegScale: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/regscale/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
